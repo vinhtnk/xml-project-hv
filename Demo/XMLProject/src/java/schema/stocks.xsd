@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/stocks"
+    xmlns="http://xml.netbeans.org/schema/stocks"
+    elementFormDefault="qualified">
+<!-- simple element -->
+    <xsd:element name="gamekey" type="gamekeytype"/>
+    <xsd:element name="gameid" type="idtype" />
+<!-- attributes -->
+    <xsd:attribute name="stockid" type="idtype"/>
+
+<!-- complex elements -->
+    <xsd:element name="stock">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="gameid" />
+                <xsd:element ref="gamekey" />
+            </xsd:sequence>
+            <xsd:attribute ref="stockid" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+<!-- types -->
+    <xsd:simpleType name="idtype">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{6}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="gamekeytype">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+</xsd:schema>

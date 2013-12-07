@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/XML%20Project/XMLProject/src/java/schema/games.xsd" uri="src/conf/xml-resources/jaxb/Game/games.xsd"/>
+    <system systemId="file:/C:/XML%20Project/XMLProject/src/java/schema/users.xsd" uri="src/conf/xml-resources/jaxb/Users/users.xsd"/>
+    <system systemId="file:/C:/XML%20Project/XMLProject/src/java/schema/genres.xsd" uri="src/conf/xml-resources/jaxb/Genres/genres.xsd"/>
+</catalog>

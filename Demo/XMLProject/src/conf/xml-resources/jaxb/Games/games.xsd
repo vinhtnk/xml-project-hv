@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/games"
+    xmlns="http://xml.netbeans.org/schema/games"
+    elementFormDefault="qualified">
+    <xsd:element name="games">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Game" type="GameType" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="GameType">
+        <xsd:sequence>
+            <xsd:element name="GameId" type="xsd:positiveInteger"/>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Price" type="xsd:float"/>
+            <xsd:element name="Pinboard" type="xsd:string"/>
+            <xsd:element name="Description" type="xsd:string"/>
+            <xsd:element name="Image_URL" type="xsd:string"/>
+            <xsd:element name="CreatedDate" type="xsd:dateTime"/>
+            <xsd:element name="GenreId" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+
+</xsd:schema>

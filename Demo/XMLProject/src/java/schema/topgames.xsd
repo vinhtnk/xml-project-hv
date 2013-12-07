@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/topgames"
+    xmlns="http://xml.netbeans.org/schema/topgames"
+    elementFormDefault="qualified">
+    <xsd:element name="topgames">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="TopGame" type="TopGameType" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="NumBerTopGame" type="xsd:positiveInteger"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="TopGameType">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Price" type="money"/>
+            <xsd:element name="Quantity" type="xsd:positiveInteger"/>
+            <xsd:element name="Total" type="money"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="money">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:totalDigits value="20"/>
+            <xsd:fractionDigits value="4"/>
+            <xsd:maxExclusive value="99999999999999999999.9999"/>
+            <xsd:minExclusive value="0.0000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

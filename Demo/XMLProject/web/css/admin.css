@@ -1,0 +1,140 @@
+
+
+#adminHead{
+    width: 800px;
+    background-color: #129FEA;
+    height: 100px;
+    margin: auto;
+}
+
+#topAdminText{
+    padding : 20px 0px 10px 40px;
+    font-size : 40px;
+    color: #FFFFFF;
+    border-radius : 4px;
+}
+#adminMain{
+    padding-top: 10px;
+    width: 800px;
+    margin:auto;
+    vertical-align: top;
+}
+
+
+#adminTopPanel{
+    display: inline-block;
+    margin: auto;
+    width: 800px;
+    height: 40px;
+
+
+}
+
+
+#adminCenterPanel{
+    vertical-align: top;
+    width: 790px;
+    padding-top : 20px;
+    margin: auto;
+
+}
+
+.cboDate{
+    display: inline-block;
+    margin : 0px 5px 5px 5px;
+}
+
+.cboTopGame{
+    margin : 5px 0px 5px 5px;
+}
+
+#adminReport{
+    display: inline-block;
+    width: 400px;
+
+}
+
+#adminOrderManage{
+    padding-left: 70px;
+    padding: 20px 0px 100px 80px;
+    margin : auto;
+    width : 780px;
+}
+
+#btnLogout{
+    float:right;
+    font-weight: bold;
+    font-size : 14px;
+    color : white;
+    padding : 5px 20px 0px 0px;
+}
+
+
+#adminGameManage{
+    padding-bottom: 100px;
+
+}
+
+.onHide {
+    display: none !important;
+}
+
+
+#outputGames{
+    width: 780px;
+    padding: 5px 15px 5px 0px;
+}
+
+.adminTbl table{
+    width: 790px;
+
+}
+.adminTbl input,input,textarea,select{
+    font-size: 12px;
+    width :140px !important;
+    padding: 5px 5px 5px 5px;
+}
+
+.orderBtn{
+    display: inline-block;
+    margin: 5px 8px 5px 8px;
+}
+
+#tblGamelist{
+    float:right;
+    padding-bottom: 100px;
+}
+
+fieldset legend {
+    padding: 0px 5px 0px 5px ;
+
+}
+
+.imgPDF img {
+    width: 80px;
+    height: 80px;    
+    margin-right:80px;
+    float:right;
+    display: inline-block;       
+    
+
+}
+
+.imgPDF img:hover{
+    cursor: pointer;
+    box-shadow: none;
+    border-radius : 5px;
+    -moz-border-radius:5px;
+    box-shadow: 2px 2px 2px 2px #888888;
+}
+#divValidatePrice{
+padding-top: 15px;
+padding-left: 50px;
+color: red;
+}
+
+#divValidateDurationReport{
+padding-top: 15px;
+padding-left: 50px;
+color: red;
+}
