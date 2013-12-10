@@ -53,9 +53,17 @@ body {
     width:916px;
 }
 
+.mainBody {
+    vertical-align: top;
+    display: inline-block;
+}
+
+#b-left-panel {
+    width:180px;
+}
 
 .body1 {
-    background:url(./Image/bg_main.jpg) 0 0  repeat;
+    background:url(Image/bg_main.jpg) 0 0  repeat;
 }
 .body2 {
     background:url(../images/bg_top_repeat.jpg) top repeat-x

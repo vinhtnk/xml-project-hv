@@ -68,9 +68,9 @@
                             <div id="loginForm">
                                 <form class="pure-form"  method="POST">
 
-                                    Email <input id="username" type="text" name="txtUsername" class="style2"/><br/><br/>
+                                    Email <input id="email" type="text" name="txtEmail" class="style2"/><br/><br/>
                                     Password <input id="password" type="password" name="txtPassword" class="style2"/><br/><br/>
-                                    <button type="submit" onclick="callAjax.login(username,password,function(){location.reload(false);});return false;" class="pure-button notice">Đăng nhập</button>
+                                    <button type="submit" onclick="callAjax.login(email,password,function(){location.reload(false);});return false;" class="pure-button notice">Đăng nhập</button>
                                     <div id="loginStatus" class="onHide"></div>
                                     <button type="submit">Đăng ký</button>
                                 </form
@@ -79,7 +79,7 @@
                             
                         </div>
                         <div id="navBarUser">
-                            <li class="onHide" ><a id="Uitem0" href="#">${FULLNAME}</a></li>
+                            <li class="onHide" ><a id="Uitem0" href="#">${USERNAME}</a></li>
 
                             <li class="onHide"><a type="submit" id="Uitem2"  href="#" onclick="callAjax.logOut();return false;" >Logout</a></li>
                         </div>
