@@ -45,7 +45,7 @@ public class MarshallerUtils {
                 CategoryType category = new CategoryType();
                 category.setCategoryID(BigInteger.valueOf(listCategory.get(i).getCategoryID()));
                 category.setCategoryName(listCategory.get(i).getCategoryName());
-                categories.setCategory(category);
+                categories.getCategory().add(category);
             }
         }
         MarshallerUtils.marshallXML(categories, outputPath);
