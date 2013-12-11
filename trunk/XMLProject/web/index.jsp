@@ -14,11 +14,13 @@
 <%@page session="true" %>
 
 <jsp:useBean class="Utils.MarshallerUtils" id="marshallerUtils" scope="request"/>
-<%
-    String webPath = application.getRealPath("/");
-    marshallerUtils.marshallingCategories(webPath + "xml/categories.xml");
-%>
-
+<c:set var="list" value="${marshallerUtils}"/>
+<c:if test="${not empty list}">
+    <%
+                String webpath = application.getRealPath("/");
+                marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
+    %>
+</c:if>
 <link href="css/style.css" rel="stylesheet"/>
 <script type="text/javascript" src="js/callAjax.js"/>
 <script type="text/javascript" src="js/jsUtils.js"/>
@@ -27,27 +29,7 @@
 
 <script type="text/javascript" language="text/javascript">
       
-    window.onload = function(){
-       
 
-
-        var info = {};
-        info.Username = "${USERNAME}";
-        info.Email = "${EMAIL}";
-        info.UID = "${UID}";
-
-        jsUtils.sessionUser(info);
-        //jsUtils.setDefaultPageId();
-
-       
-        if(info.Username!="" && info.Username!=null){
-            jsUtils.checkType(info.Username);
-        }
-
-        
-        onLoadListener();
-       
-    };
 
 
     var logout = function(){
@@ -66,12 +48,12 @@
         border-left: 1px solid #114646;
 
     }
-}
+    }
 </style>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>JSP Page</title>
+        <title>H2 Store</title>
     </head>
     <body>
         <div id="header">
@@ -82,7 +64,7 @@
                 <tr>
                     <td align="left" valign="top" width="20%">
                         <div id="b-left-panel" class="mainBody" >
-                            <jsp:include page="leftmenu.jsp" />
+                            <jsp:include page="leftmenu.jsp" flush="true"/>
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">

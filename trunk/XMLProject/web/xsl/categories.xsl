@@ -18,7 +18,7 @@
         <xsl:apply-templates select="categories"/>
     </xsl:template>
     <xsl:template match="categories">
-        <xsl:for-each select="categoryType">
+        <xsl:for-each select="category">
             <li>
                 <a>
                     <xsl:attribute name="href">/selectCategoryOfProduct.jsp?Condition=CategoryId&amp;Val=
