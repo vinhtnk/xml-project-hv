@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class OrderDTO {
     private int orderID;
-    private String customerEmail;
+    private String email;
     private float totalPrice;
     private Date orderDate;
     private Date receiveDate;
@@ -23,9 +23,9 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(int orderID, String customerEmail, float totalPrice, Date orderDate, Date receiveDate, String note, String status) {
+    public OrderDTO(int orderID, String email, float totalPrice, Date orderDate, Date receiveDate, String note, String status) {
         this.orderID = orderID;
-        this.customerEmail = customerEmail;
+        this.email = email;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
         this.receiveDate = receiveDate;
@@ -33,12 +33,12 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNote() {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/users"
+    xmlns="http://xml.netbeans.org/schema/users"
+    elementFormDefault="qualified">
+    <xsd:element name="users">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="userType" />
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:element>
+
+    <xsd:complexType name="userType">
+        <xsd:sequence>
+            <xsd:element name="userID" type="xsd:integer" />
+            <xsd:element name="userName" type="xsd:string" />
+            <xsd:element name="gender" type="xsd:string" />
+            <xsd:element name="phone" type="xsd:string" />
+            <xsd:element name="address" type="xsd:string" />
+            <xsd:element name="email" type="xsd:string" />
+            <xsd:element name="pwd" type="xsd:string" />
+            <xsd:element name="role" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -22,8 +22,9 @@ import java.util.logging.Logger;
  */
 public class ProductDAO {
 
-    Connection con;
-    PreparedStatement stm;
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
     String query = "";
 
     public List<ProductDTO> getAllProduct() {
@@ -32,10 +33,10 @@ public class ProductDAO {
         try {
             query = "Select * from product";
             stm = con.prepareStatement(query);
-            ResultSet rs = stm.executeQuery(query);
-            ProductDTO product = null;
+            rs = stm.executeQuery();
+            
             while (rs.next()) {
-                product = new ProductDTO();
+                ProductDTO product = new ProductDTO();
                 product.setProductID(rs.getInt(0));
                 product.setProductName(rs.getString(1));
                 product.setCategoryID(rs.getInt(2));
@@ -51,8 +52,15 @@ public class ProductDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -65,10 +73,10 @@ public class ProductDAO {
         try {
             query = "Select * from product where New_Product='true'";
             stm = con.prepareStatement(query);
-            ResultSet rs = stm.executeQuery(query);
-            ProductDTO product = null;
+            rs = stm.executeQuery();
+             
             while (rs.next()) {
-                product = new ProductDTO();
+                ProductDTO product = new ProductDTO();
                 product.setProductID(rs.getInt(0));
                 product.setProductName(rs.getString(1));
                 product.setCategoryID(rs.getInt(2));
@@ -84,8 +92,15 @@ public class ProductDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -99,10 +114,10 @@ public class ProductDAO {
             query = "Select * from product where productName like ?";
             stm = con.prepareStatement(query);
             stm.setString(1, "%" + key + "%");
-            ResultSet rs = stm.executeQuery(query);
-            ProductDTO product = null;
+            rs = stm.executeQuery();
+            
             while (rs.next()) {
-                product = new ProductDTO();
+                ProductDTO product = new ProductDTO();
                 product.setProductID(rs.getInt(0));
                 product.setProductName(rs.getString(1));
                 product.setCategoryID(rs.getInt(2));
@@ -118,8 +133,15 @@ public class ProductDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -133,10 +155,10 @@ public class ProductDAO {
             query = "Select * from product where categoryid=?";
             stm = con.prepareStatement(query);
             stm.setInt(1, categoryID);
-            ResultSet rs = stm.executeQuery(query);
-            ProductDTO product = null;
+            rs = stm.executeQuery();
+            
             while (rs.next()) {
-                product = new ProductDTO();
+                ProductDTO product = new ProductDTO();
                 product.setProductID(rs.getInt(0));
                 product.setProductName(rs.getString(1));
                 product.setCategoryID(rs.getInt(2));
@@ -152,8 +174,15 @@ public class ProductDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -181,8 +210,12 @@ public class ProductDAO {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,8 +245,12 @@ public class ProductDAO {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -237,8 +274,12 @@ public class ProductDAO {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
