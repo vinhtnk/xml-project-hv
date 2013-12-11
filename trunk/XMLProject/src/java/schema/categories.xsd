@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/categories"
+    xmlns="http://xml.netbeans.org/schema/categories"
+    elementFormDefault="qualified">
+
+    <xsd:element name="categories">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="category" type="categoryType" />
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:element>
+
+    <xsd:complexType name="categoryType">
+        <xsd:sequence>
+            <xsd:element name="categoryID" type="xsd:integer" />
+            <xsd:element name="categoryName" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

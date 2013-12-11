@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
 import DTO.CategoryDTO;
@@ -22,8 +21,10 @@ import java.util.logging.Logger;
  * @author Hoang
  */
 public class CategoryDAO {
-    Connection con;
-    PreparedStatement stm;
+
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
     String query = "";
 
     public List<CategoryDTO> getAllCategory() {
@@ -32,27 +33,36 @@ public class CategoryDAO {
         try {
             query = "Select * from category";
             stm = con.prepareStatement(query);
-            ResultSet rs = stm.executeQuery(query);
-            CategoryDTO category = null;
+            rs = stm.executeQuery();
+             
             while (rs.next()) {
-                category = new CategoryDTO();
-                category.setCategoryID(rs.getInt(0));
-                category.setCategoryName(rs.getString(1));
+                CategoryDTO category = new CategoryDTO();
+                category.setCategoryID(rs.getInt(1));
+                category.setCategoryName(rs.getString(2));
                 listCategory.add(category);
             }
             return listCategory;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }    
+
+    }
 
     public List<CategoryDTO> searchCategoryByName(String key) {
         con = ConnectDB.getCon();
@@ -61,44 +71,57 @@ public class CategoryDAO {
             query = "Select * from category where categoryName like ?";
             stm = con.prepareStatement(query);
             stm.setString(1, "%" + key + "%");
-            ResultSet rs = stm.executeQuery(query);
-            CategoryDTO category = null;
+            rs = stm.executeQuery();
+             
             while (rs.next()) {
-                category = new CategoryDTO();
+                CategoryDTO category = new CategoryDTO();
                 category.setCategoryID(rs.getInt(0));
                 category.setCategoryName(rs.getString(1));
                 listCategory.add(category);
             }
             return listCategory;
-
         } catch (SQLException e) {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }    
+    }
 
     public boolean addNewCategory(CategoryDTO category) {
         con = ConnectDB.getCon();
+
+
         try {
             query = "insert into category (categoryName) values (?)";
             stm = con.prepareStatement(query);
             stm.setString(1, category.getCategoryName());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
         } catch (SQLException e) {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -106,24 +129,30 @@ public class CategoryDAO {
         return false;
     }
 
-    public boolean updateCategory(CategoryDTO category){
+    public boolean updateCategory(CategoryDTO category) {
         con = ConnectDB.getCon();
+
+
         try {
-            query = "update category set categoryName = ? where categoryid=?" ;
+            query = "update category set categoryName = ? where categoryid=?";
 
             stm = con.prepareStatement(query);
             stm.setString(1, category.getCategoryName());
             stm.setInt(2, category.getCategoryID());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
         } catch (SQLException e) {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -131,15 +160,15 @@ public class CategoryDAO {
         return false;
     }
 
-    public boolean deleteCategory(CategoryDTO category){
+    public boolean deleteCategory(CategoryDTO category) {
         con = ConnectDB.getCon();
         try {
-            query = "delete from category where categoryid=?" ;
+            query = "delete from category where categoryid=?";
 
             stm = con.prepareStatement(query);
             stm.setInt(1, category.getCategoryID());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
 
@@ -147,8 +176,12 @@ public class CategoryDAO {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             }

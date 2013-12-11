@@ -21,8 +21,9 @@ import java.util.logging.Logger;
  * @author Hoang
  */
 public class OrderDetailDAO {
-    Connection con;
-    PreparedStatement stm;
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
     String query = "";
 
     public List<OrderDetailDTO> getAllOrderDetail() {
@@ -31,10 +32,10 @@ public class OrderDetailDAO {
         try {
             query = "Select * from orderDetail";
             stm = con.prepareStatement(query);
-            ResultSet rs = stm.executeQuery(query);
-            OrderDetailDTO orderDetail = null;
+            rs = stm.executeQuery();
+            
             while (rs.next()) {
-                orderDetail = new OrderDetailDTO();
+                OrderDetailDTO orderDetail = new OrderDetailDTO();
                 orderDetail.setOrderID(rs.getInt(0));
                 orderDetail.setProductID(rs.getInt(1));
                 orderDetail.setProductName(rs.getString(2));
@@ -49,8 +50,15 @@ public class OrderDetailDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -64,10 +72,10 @@ public class OrderDetailDAO {
             query = "Select * from orderDetail where orderDetailId = ?";
             stm = con.prepareStatement(query);
             stm.setInt(1, orderDetailId);
-            ResultSet rs = stm.executeQuery(query);
-            OrderDetailDTO orderDetail = null;
+            rs = stm.executeQuery();
+             
             while (rs.next()) {
-                orderDetail = new OrderDetailDTO();
+                OrderDetailDTO orderDetail = new OrderDetailDTO();
                 orderDetail = new OrderDetailDTO();
                 orderDetail.setOrderID(rs.getInt(0));
                 orderDetail.setProductID(rs.getInt(1));
@@ -82,8 +90,15 @@ public class OrderDetailDAO {
             return null;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -108,8 +123,12 @@ public class OrderDetailDAO {
             
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -132,8 +151,12 @@ public class OrderDetailDAO {
             
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -150,7 +173,7 @@ public class OrderDetailDAO {
             stm = con.prepareStatement(query);
             stm.setInt(1, orderDetail.getOrderID());
             stm.setInt(2, orderDetail.getProductID());
-            ResultSet rs = stm.executeQuery();
+            rs = stm.executeQuery();
             if(rs.next()){
                 return true;
             }
@@ -158,8 +181,15 @@ public class OrderDetailDAO {
             return false;
         } finally {
             try {
-                con.close();
-                stm.close();
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
             }

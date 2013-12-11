@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://xml.netbeans.org/schema/orderDetail"
+    xmlns="http://xml.netbeans.org/schema/orderDetail"
+    elementFormDefault="qualified">
+    <xsd:element name="orderDetails">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="orderDetail" type="orderDetailType" />
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:element>
+
+    <xsd:complexType name="orderDetailType">
+        <xsd:sequence>
+            <xsd:element name="orderID" type="xsd:integer" />
+            <xsd:element name="productID" type="xsd:integer" />
+            <xsd:element name="productName" type="xsd:string" />
+            <xsd:element name="quantity" type="xsd:integer" />
+            <xsd:element name="price" type="xsd:float" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
