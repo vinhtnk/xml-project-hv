@@ -1,6 +1,8 @@
 
 package generated.jaxb.Users;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,31 +36,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "users")
 public class Users {
 
-    @XmlElement(required = true)
-    protected UserType user;
+    @XmlElement(name="user", required = true)
+    protected List<UserType> user;
 
-    /**
-     * Gets the value of the user property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserType }
-     *     
-     */
-    public UserType getUser() {
+    public List<UserType> getUser() {
+        if (user == null){
+            user = new ArrayList<UserType>();
+        }
         return user;
     }
 
-    /**
-     * Sets the value of the user property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserType }
-     *     
-     */
-    public void setUser(UserType value) {
-        this.user = value;
-    }
+    
 
 }

@@ -1,6 +1,8 @@
 
 package generated.jaxb.Orders;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,31 +36,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "orders")
 public class Orders {
 
-    @XmlElement(required = true)
-    protected OrderType order;
+    @XmlElement(name="order", required = true)
+    protected List<OrderType> order;
 
-    /**
-     * Gets the value of the order property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OrderType }
-     *     
-     */
-    public OrderType getOrder() {
+    public List<OrderType> getOrder() {
+        if (order == null){
+            order = new ArrayList<OrderType>();
+        }
         return order;
     }
 
-    /**
-     * Sets the value of the order property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OrderType }
-     *     
-     */
-    public void setOrder(OrderType value) {
-        this.order = value;
-    }
+    
 
 }

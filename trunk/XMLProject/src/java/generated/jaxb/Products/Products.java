@@ -1,6 +1,8 @@
 
 package generated.jaxb.Products;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,31 +36,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "products")
 public class Products {
 
-    @XmlElement(required = true)
-    protected ProductType product;
+    @XmlElement(name="product", required = true)
+    protected List<ProductType> product;
 
-    /**
-     * Gets the value of the product property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ProductType }
-     *     
-     */
-    public ProductType getProduct() {
+    public List<ProductType> getProduct() {
+        if (product == null){
+            product = new ArrayList<ProductType>();
+        }
         return product;
     }
 
-    /**
-     * Sets the value of the product property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ProductType }
-     *     
-     */
-    public void setProduct(ProductType value) {
-        this.product = value;
-    }
+   
 
 }
