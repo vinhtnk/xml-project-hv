@@ -37,8 +37,8 @@ public class CategoryDAO {
              
             while (rs.next()) {
                 CategoryDTO category = new CategoryDTO();
-                category.setCategoryID(rs.getInt(1));
-                category.setCategoryName(rs.getString(2));
+                category.setCategoryID(rs.getInt("categoryID"));
+                category.setCategoryName(rs.getString("categoryName"));
                 listCategory.add(category);
             }
             return listCategory;
@@ -75,8 +75,8 @@ public class CategoryDAO {
              
             while (rs.next()) {
                 CategoryDTO category = new CategoryDTO();
-                category.setCategoryID(rs.getInt(0));
-                category.setCategoryName(rs.getString(1));
+                category.setCategoryID(rs.getInt("categoryID"));
+                category.setCategoryName(rs.getString("categoryName"));
                 listCategory.add(category);
             }
             return listCategory;

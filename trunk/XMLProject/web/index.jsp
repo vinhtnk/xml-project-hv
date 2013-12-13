@@ -13,14 +13,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <%@page session="true" %>
 
-<jsp:useBean class="Utils.MarshallerUtils" id="marshallerUtils" scope="request"/>
-<c:set var="list" value="${marshallerUtils}"/>
-<c:if test="${not empty list}">
-    <%
-                String webpath = application.getRealPath("/");
-                marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
-    %>
-</c:if>
+<jsp:useBean class="Utils.JAXBMarshalling" id="marshallerUtils" scope="request"/>
+
+<%
+            String webpath = application.getRealPath("/");
+            marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
+            marshallerUtils.marshallingProduct(webpath + "xml/products.xml");
+%>
+
 <link href="css/style.css" rel="stylesheet"/>
 <script type="text/javascript" src="js/callAjax.js"/>
 <script type="text/javascript" src="js/jsUtils.js"/>
@@ -57,19 +57,20 @@
     </head>
     <body>
         <div id="header">
-            <jsp:include page="header.jsp"/>
+            <jsp:include page="jsp/header.jsp"/>
         </div>
         <div>
             <table class="body5">
                 <tr>
-                    <td align="left" valign="top" width="20%">
-                        <div id="b-left-panel" class="mainBody" >
-                            <jsp:include page="leftmenu.jsp" flush="true"/>
+                    <td align="left" valign="top" width="180px">
+                        <div id="b-left-panel" class="mainBody" align="center">
+                            <jsp:include page="jsp/leftmenu.jsp"/>
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
-                        <div id="b-center-panel" >
-                            <h1>Hello World!a â cầ</h1>
+                        <div id="listItem">
+                            <jsp:include page="jsp/listProduct.jsp" flush="true" />
+
                         </div>
                     </td>
                 </tr>
@@ -79,7 +80,7 @@
 
         </div>
         <div id="footer">
-            <jsp:include page="footer.jsp"/>
+            <jsp:include page="jsp/footer.jsp"/>
         </div>
     </body>
 </html>

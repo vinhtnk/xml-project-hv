@@ -44,7 +44,7 @@ public class OrderDetailType {
     @XmlElement(required = true)
     protected BigInteger orderID;
     @XmlElement(required = true)
-    protected BigInteger productID;
+    protected String productID;
     @XmlElement(required = true)
     protected String productName;
     @XmlElement(required = true)
@@ -83,7 +83,7 @@ public class OrderDetailType {
      *     {@link BigInteger }
      *     
      */
-    public BigInteger getProductID() {
+    public String getProductID() {
         return productID;
     }
 
@@ -95,7 +95,7 @@ public class OrderDetailType {
      *     {@link BigInteger }
      *     
      */
-    public void setProductID(BigInteger value) {
+    public void setProductID(String value) {
         this.productID = value;
     }
 
