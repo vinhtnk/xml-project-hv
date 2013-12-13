@@ -21,16 +21,18 @@
         <xsl:for-each select="category">
             <li>
                 <a>
-                    <xsl:attribute name="href">/selectCategoryOfProduct.jsp?Condition=CategoryId&amp;Val=
-                        <xsl:value-of select="CategoryId"/>
+                    <xsl:attribute name="href">/selectCategoryOfProduct.jsp?Condition=categoryID&amp;Val=
+                        <xsl:value-of select="categoryID"/>
                     </xsl:attribute>
                     <xsl:attribute name="id">
-                        <xsl:value-of select="CategoryId"/>
+                        <xsl:value-of select="categoryID"/>
                     </xsl:attribute>
-                    <xsl:value-of select="CategoryName"/>
+                    <div>
+                    <xsl:value-of select="categoryName"/></div>
                 </a>
 
             </li>
+           
         </xsl:for-each>
 
     </xsl:template>

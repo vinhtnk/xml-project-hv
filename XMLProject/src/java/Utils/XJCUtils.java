@@ -22,12 +22,12 @@ public class XJCUtils {
      */
     public static void main(String[] args) {
         try {
-            XJCUtils.generateCategoriesObject();
-            XJCUtils.generateProductsObject();
-            XJCUtils.generateUsersObject();
-            XJCUtils.generateOrdersObject();
-            XJCUtils.generateOrderDetailsObject();
-
+//            XJCUtils.generateCategoriesObject();
+//            XJCUtils.generateProductsObject();
+//            XJCUtils.generateUsersObject();
+//            XJCUtils.generateOrdersObject();
+//            XJCUtils.generateOrderDetailsObject();
+            JAXBMarshalling.marshallingProduct("src/java/Utils/demo2.xml");
         } catch (Exception e) {
             e.printStackTrace();
         }

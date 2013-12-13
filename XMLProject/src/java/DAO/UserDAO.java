@@ -68,14 +68,14 @@ public class UserDAO {
              
             while (rs.next()) {
                 UserDTO user = new UserDTO();
-                user.setUserID(rs.getInt(0));
-                user.setUserName(rs.getString(1));
-                user.setGender(rs.getString(2));
-                user.setPhone(rs.getString(3));
-                user.setAddress(rs.getString(4));
-                user.setEmail(rs.getString(5));
-                user.setPwd(rs.getString(6));
-                user.setRole(rs.getString(7));
+                user.setUserID(rs.getInt("UserID"));
+                user.setUserName(rs.getString("UserName"));
+                user.setGender(rs.getString("Gender"));
+                user.setPhone(rs.getString("Phone"));
+                user.setAddress(rs.getString("Address"));
+                user.setEmail(rs.getString("Email"));
+                user.setPwd(rs.getString("Password"));
+                user.setRole(rs.getString("Role"));
                 
                 listUser.add(user);
             }
@@ -111,14 +111,14 @@ public class UserDAO {
              
             while (rs.next()) {
                 UserDTO user = new UserDTO();
-                user.setUserID(rs.getInt(0));
-                user.setUserName(rs.getString(1));
-                user.setGender(rs.getString(2));
-                user.setPhone(rs.getString(3));
-                user.setAddress(rs.getString(4));
-                user.setEmail(rs.getString(5));
-                user.setPwd(rs.getString(6));
-                user.setRole(rs.getString(7));
+                user.setUserID(rs.getInt("UserID"));
+                user.setUserName(rs.getString("UserName"));
+                user.setGender(rs.getString("Gender"));
+                user.setPhone(rs.getString("Phone"));
+                user.setAddress(rs.getString("Address"));
+                user.setEmail(rs.getString("Email"));
+                user.setPwd(rs.getString("Password"));
+                user.setRole(rs.getString("Role"));
                 listUser.add(user);
             }
             return listUser;
@@ -254,14 +254,14 @@ public class UserDAO {
             UserDTO user = new UserDTO();
             while (rs.next()) {
 
-                user.setUserID(rs.getInt(0));
-                user.setUserName(rs.getString(1));
-                user.setGender(rs.getString(2));
-                user.setPhone(rs.getString(3));
-                user.setAddress(rs.getString(4));
-                user.setEmail(rs.getString(5));
-                user.setPwd(rs.getString(6));
-                user.setRole(rs.getString(7));
+                user.setUserID(rs.getInt("UserID"));
+                user.setUserName(rs.getString("UserName"));
+                user.setGender(rs.getString("Gender"));
+                user.setPhone(rs.getString("Phone"));
+                user.setAddress(rs.getString("Address"));
+                user.setEmail(rs.getString("Email"));
+                user.setPwd(rs.getString("Password"));
+                user.setRole(rs.getString("Role"));
                 
             }
             return user;

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
 import DTO.OrderDTO;
@@ -22,6 +21,7 @@ import java.util.logging.Logger;
  * @author Hoang
  */
 public class OrderDAO {
+
     Connection con = null;
     PreparedStatement stm = null;
     ResultSet rs = null;
@@ -34,16 +34,16 @@ public class OrderDAO {
             query = "Select * from order";
             stm = con.prepareStatement(query);
             rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 OrderDTO order = new OrderDTO();
-                order.setOrderID(rs.getInt(0));
-                order.setEmail(rs.getString(1));
-                order.setTotalPrice(rs.getFloat(2));
-                order.setOrderDate(rs.getDate(3));
-                order.setReceiveDate(rs.getDate(4));
-                order.setNote(rs.getString(5));
-                order.setStatus(rs.getString(6));
+                order.setOrderID(rs.getInt("OrderID"));
+                order.setEmail(rs.getString("Email"));
+                order.setTotalPrice(rs.getFloat("TotalPrice"));
+                order.setOrderDate(rs.getDate("OrderDate"));
+                order.setReceiveDate(rs.getDate("ReceiveDate"));
+                order.setNote(rs.getString("Note"));
+                order.setStatus(rs.getString("Status"));
                 listorder.add(order);
             }
             return listorder;
@@ -75,16 +75,16 @@ public class OrderDAO {
             stm = con.prepareStatement(query);
             stm.setInt(1, orderId);
             rs = stm.executeQuery();
-             
+
             while (rs.next()) {
                 OrderDTO order = new OrderDTO();
-                order.setOrderID(rs.getInt(0));
-                order.setEmail(rs.getString(1));
-                order.setTotalPrice(rs.getFloat(2));
-                order.setOrderDate(rs.getDate(3));
-                order.setReceiveDate(rs.getDate(4));
-                order.setNote(rs.getString(5));
-                order.setStatus(rs.getString(6));
+                order.setOrderID(rs.getInt("OrderID"));
+                order.setEmail(rs.getString("Email"));
+                order.setTotalPrice(rs.getFloat("TotalPrice"));
+                order.setOrderDate(rs.getDate("OrderDate"));
+                order.setReceiveDate(rs.getDate("ReceiveDate"));
+                order.setNote(rs.getString("Note"));
+                order.setStatus(rs.getString("Status"));
                 listorder.add(order);
             }
             return listorder;
@@ -121,7 +121,7 @@ public class OrderDAO {
             stm.setString(5, order.getNote());
             stm.setString(6, order.getStatus());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
         } catch (SQLException e) {
@@ -141,16 +141,16 @@ public class OrderDAO {
         return false;
     }
 
-    public boolean updateorder(OrderDTO order){
+    public boolean updateorder(OrderDTO order) {
         con = ConnectDB.getCon();
         try {
-            query = "update order set status = ? where orderid=?" ;
+            query = "update order set status = ? where orderid=?";
 
             stm = con.prepareStatement(query);
             stm.setString(1, order.getStatus());
             stm.setInt(2, order.getOrderID());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
         } catch (SQLException e) {
@@ -170,15 +170,15 @@ public class OrderDAO {
         return false;
     }
 
-    public boolean deleteorder(OrderDTO order){
+    public boolean deleteorder(OrderDTO order) {
         con = ConnectDB.getCon();
         try {
-            query = "delete from order where orderid=?" ;
+            query = "delete from order where orderid=?";
 
             stm = con.prepareStatement(query);
             stm.setInt(1, order.getOrderID());
             int row = stm.executeUpdate();
-            if(row>1){
+            if (row > 1) {
                 return true;
             }
 

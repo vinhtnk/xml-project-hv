@@ -36,11 +36,11 @@ public class OrderDetailDAO {
             
             while (rs.next()) {
                 OrderDetailDTO orderDetail = new OrderDetailDTO();
-                orderDetail.setOrderID(rs.getInt(0));
-                orderDetail.setProductID(rs.getInt(1));
-                orderDetail.setProductName(rs.getString(2));
-                orderDetail.setQuantity(rs.getInt(3));
-                orderDetail.setPrice(rs.getFloat(4));
+                orderDetail.setOrderID(rs.getInt("OrderID"));
+                orderDetail.setProductID(rs.getString("ProductID"));
+                orderDetail.setProductName(rs.getString("ProductName"));
+                orderDetail.setQuantity(rs.getInt("Quantity"));
+                orderDetail.setPrice(rs.getFloat("Price"));
                 
                 listOrderDetail.add(orderDetail);
             }
@@ -78,7 +78,7 @@ public class OrderDetailDAO {
                 OrderDetailDTO orderDetail = new OrderDetailDTO();
                 orderDetail = new OrderDetailDTO();
                 orderDetail.setOrderID(rs.getInt(0));
-                orderDetail.setProductID(rs.getInt(1));
+                orderDetail.setProductID(rs.getString(1));
                 orderDetail.setProductName(rs.getString(2));
                 orderDetail.setQuantity(rs.getInt(3));
                 orderDetail.setPrice(rs.getFloat(4));
@@ -112,7 +112,7 @@ public class OrderDetailDAO {
                     + "values (?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setInt(1, orderDetail.getOrderID());
-            stm.setInt(2, orderDetail.getProductID());
+            stm.setString(2, orderDetail.getProductID());
             stm.setString(3, orderDetail.getProductName());
             stm.setInt(4, orderDetail.getQuantity());
             stm.setFloat(5, orderDetail.getPrice());
@@ -144,7 +144,7 @@ public class OrderDetailDAO {
             stm = con.prepareStatement(query);
             stm.setInt(1, orderDetail.getQuantity());
             stm.setInt(2, orderDetail.getOrderID());
-            stm.setInt(3, orderDetail.getProductID());
+            stm.setString(3, orderDetail.getProductID());
             stm.executeUpdate();
             
         } catch (SQLException e) {
@@ -172,7 +172,7 @@ public class OrderDetailDAO {
 
             stm = con.prepareStatement(query);
             stm.setInt(1, orderDetail.getOrderID());
-            stm.setInt(2, orderDetail.getProductID());
+            stm.setString(2, orderDetail.getProductID());
             rs = stm.executeQuery();
             if(rs.next()){
                 return true;

@@ -11,7 +11,7 @@ package DTO;
  */
 public class OrderDetailDTO {
     private int orderID;
-    private int productID;
+    private String productID;
     private String productName;
     private int quantity;
     private float price;
@@ -19,7 +19,7 @@ public class OrderDetailDTO {
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(int orderID, int productID, String productName, int quantity, float price) {
+    public OrderDetailDTO(int orderID, String productID, String productName, int quantity, float price) {
         this.orderID = orderID;
         this.productID = productID;
         this.productName = productName;
@@ -43,11 +43,11 @@ public class OrderDetailDTO {
         this.price = price;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 

@@ -6,15 +6,15 @@
 package DTO;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
+
 
 /**
  *
  * @author Hoang
  */
-@XmlSeeAlso(java.lang.Object.class)
+
 public class ProductDTO implements Serializable{
-    private int productID;
+    private String productID;
     private String productName;
     private int categoryID;
     private float price;
@@ -27,7 +27,7 @@ public class ProductDTO implements Serializable{
 
 
 
-    public ProductDTO(int productID, String productName, int categoryID, float price, String description, String img_link, boolean new_product) {
+    public ProductDTO(String productID, String productName, int categoryID, float price, String description, String img_link, boolean new_product) {
         this.productID = productID;
         this.productName = productName;
         this.categoryID = categoryID;
@@ -77,11 +77,11 @@ public class ProductDTO implements Serializable{
         this.price = price;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 

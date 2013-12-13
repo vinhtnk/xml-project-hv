@@ -17,7 +17,7 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Hoang
  */
-public class UnmarshallerUtils {
+public class JAXBUnmarshalling {
     public static List<Object> unmashallXML(Object obj, String sourceXML){
         try {
             JAXBContext jc = JAXBContext.newInstance(obj.getClass());

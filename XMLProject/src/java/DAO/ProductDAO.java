@@ -34,16 +34,16 @@ public class ProductDAO {
             query = "Select * from product";
             stm = con.prepareStatement(query);
             rs = stm.executeQuery();
-            
+            ProductDTO product = null;
             while (rs.next()) {
-                ProductDTO product = new ProductDTO();
-                product.setProductID(rs.getInt(0));
-                product.setProductName(rs.getString(1));
-                product.setCategoryID(rs.getInt(2));
-                product.setPrice(rs.getFloat(3));
-                product.setDescription(rs.getString(4));
-                product.setImg_link(rs.getString(5));
-                product.setNew_product(rs.getBoolean(6));
+                product = new ProductDTO();
+                product.setProductID(rs.getString("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setCategoryID(rs.getInt("CategoryId"));
+                product.setPrice(rs.getFloat("Price"));
+                product.setDescription(rs.getString("Description"));
+                product.setImg_link(rs.getString("Image_Link"));
+                product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
             }
             return listProduct;
@@ -77,13 +77,13 @@ public class ProductDAO {
              
             while (rs.next()) {
                 ProductDTO product = new ProductDTO();
-                product.setProductID(rs.getInt(0));
-                product.setProductName(rs.getString(1));
-                product.setCategoryID(rs.getInt(2));
-                product.setPrice(rs.getFloat(3));
-                product.setDescription(rs.getString(4));
-                product.setImg_link(rs.getString(5));
-                product.setNew_product(rs.getBoolean(6));
+                product.setProductID(rs.getString("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setCategoryID(rs.getInt("CategoryId"));
+                product.setPrice(rs.getFloat("Price"));
+                product.setDescription(rs.getString("Description"));
+                product.setImg_link(rs.getString("Image_Link"));
+                product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
             }
             return listProduct;
@@ -118,13 +118,13 @@ public class ProductDAO {
             
             while (rs.next()) {
                 ProductDTO product = new ProductDTO();
-                product.setProductID(rs.getInt(0));
-                product.setProductName(rs.getString(1));
-                product.setCategoryID(rs.getInt(2));
-                product.setPrice(rs.getFloat(3));
-                product.setDescription(rs.getString(4));
-                product.setImg_link(rs.getString(5));
-                product.setNew_product(rs.getBoolean(6));
+                product.setProductID(rs.getString("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setCategoryID(rs.getInt("CategoryId"));
+                product.setPrice(rs.getFloat("Price"));
+                product.setDescription(rs.getString("Description"));
+                product.setImg_link(rs.getString("Image_Link"));
+                product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
             }
             return listProduct;
@@ -159,13 +159,13 @@ public class ProductDAO {
             
             while (rs.next()) {
                 ProductDTO product = new ProductDTO();
-                product.setProductID(rs.getInt(0));
-                product.setProductName(rs.getString(1));
-                product.setCategoryID(rs.getInt(2));
-                product.setPrice(rs.getFloat(3));
-                product.setDescription(rs.getString(4));
-                product.setImg_link(rs.getString(5));
-                product.setNew_product(rs.getBoolean(6));
+                product.setProductID(rs.getString("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setCategoryID(rs.getInt("CategoryId"));
+                product.setPrice(rs.getFloat("Price"));
+                product.setDescription(rs.getString("Description"));
+                product.setImg_link(rs.getString("Image_Link"));
+                product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
             }
             return listProduct;
@@ -192,15 +192,16 @@ public class ProductDAO {
     public boolean addNewProduct(ProductDTO product) {
         con = ConnectDB.getCon();
         try {
-            query = "insert into product (productName, categoryid, price, description, image_link, new_product"
-                    + "values (?,?,?,?,?,?)";
+            query = "insert into product (productID, productName, categoryid, price, description, image_link, new_product"
+                    + "values (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
-            stm.setString(1, product.getProductName());
-            stm.setInt(2, product.getCategoryID());
-            stm.setFloat(3, product.getPrice());
-            stm.setString(4, product.getDescription());
-            stm.setString(5, product.getImg_link());
-            stm.setBoolean(6, product.isNew_product());
+            stm.setString(1, product.getProductID());
+            stm.setString(2, product.getProductID());
+            stm.setInt(3, product.getCategoryID());
+            stm.setFloat(4, product.getPrice());
+            stm.setString(5, product.getDescription());
+            stm.setString(6, product.getImg_link());
+            stm.setBoolean(7, product.isNew_product());
             stm.execute();
             int row = stm.executeUpdate();
             if(row>1){
@@ -236,7 +237,7 @@ public class ProductDAO {
             stm.setString(4, product.getDescription());
             stm.setString(5, product.getImg_link());
             stm.setBoolean(6, product.isNew_product());
-            stm.setInt(7, product.getProductID());
+            stm.setString(7, product.getProductID());
             int row = stm.executeUpdate();
             if(row>1){
                 return true;
@@ -264,7 +265,7 @@ public class ProductDAO {
             query = "delete from product where productid=?" ;
 
             stm = con.prepareStatement(query);            
-            stm.setInt(1, product.getProductID());
+            stm.setString(1, product.getProductID());
             int row = stm.executeUpdate();
             if(row>1){
                 return true;

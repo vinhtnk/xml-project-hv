@@ -228,9 +228,49 @@ ul.menu-content li a span:hover {
 ul.content_menu li, ul.ex_menu li {
     margin:0;
 }
-ul.sb_menu li {
+ul.leftPanel ul.leftPanel li {
     padding:2px 0 2px 15px;
 }
+
+ul.leftPanel, ul.ex_menu {
+	margin:0;
+	padding:0;
+	color: Black;
+	list-style:none;
+}
+ul.leftPanel li, ul.ex_menu li {
+	margin:0;
+}
+ul.leftPanel li {
+	padding:2px 0 2px 15px;
+}
+ul.ex_menu li {
+	padding:2px 0 2px 15px;
+}
+ul.leftPanel li a, ul.ex_menu li a {
+	display:block;
+	color: #333333;
+	text-decoration:none;
+        
+	padding:5px;
+	margin-left:-15px;
+	padding-left:15px;
+        text-align: left;
+}
+ul.leftPanel li a:hover, ul.ex_menu li a:hover{
+	color:#FFF;
+	background:#C8DAE6;
+}
+
+ul.leftPanel li.active a {
+    background:#78bbe6;
+    font-weight: bold;
+}
+
+ul.leftPanel li a:hover {
+	text-decoration:none;
+}
+
 ul.ex_menu li {
     padding:2px 0 2px 15px;
 }
@@ -242,7 +282,7 @@ ul.content_menu li a, ul.ex_menu li a {
     margin-left:-15px;
     padding-left:15px;
 }
-ul.content_menu li a:hover, ul.ex_menu li a:hover, ul.sb_menu li.active a, ul.ex_menu li.active a {
+ul.content_menu li a:hover, ul.ex_menu li a:hover, ul.leftPanel li.active a, ul.ex_menu li.active a {
     color:#FFF;
     background:#78bbe6;
 }
@@ -586,19 +626,18 @@ nav ul,nav ol {
     list-style-image:none
 }
 
-.pure-skin-xml .pure-form button,
-.pure-skin-xml .pure-form input,
-.pure-skin-xml .pure-form select,
-.pure-skin-xml .pure-form textarea {
-    font-size: 100%; /* 1 */
-    margin: 0; /* 2 */
-    vertical-align: baseline; /* 3 */
 
-}
 .onHide {
     display: none !important;
 }
 
 .onhidden{
     visibility: hidden;
+}
+
+.imgItem{
+    width: 80%;
+    height: 80%;
+    max-width: 200px;
+    max-height: 230px;
 }
