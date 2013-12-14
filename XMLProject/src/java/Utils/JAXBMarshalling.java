@@ -75,7 +75,7 @@ public class JAXBMarshalling {
                 product.setProductID(listProduct.get(i).getProductID());
                 product.setProductName(listProduct.get(i).getProductName());
                 product.setCategoryID(BigInteger.valueOf(listProduct.get(i).getCategoryID()));
-                product.setPrice(Float.valueOf(listProduct.get(i).getPrice()));
+                product.setPrice(Integer.valueOf(listProduct.get(i).getPrice()));
                 product.setDescription(listProduct.get(i).getDescription());
                 product.setImgLink(listProduct.get(i).getImg_link());
                 product.setNewProduct(Boolean.valueOf(listProduct.get(i).isNew_product()));

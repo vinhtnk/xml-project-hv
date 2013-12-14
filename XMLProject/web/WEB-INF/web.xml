@@ -12,6 +12,10 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controller.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductsController</servlet-name>
+        <servlet-class>Controller.ProductsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AppWebService</servlet-name>
         <url-pattern>/AppWebService</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductsController</servlet-name>
+        <url-pattern>/ProductsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

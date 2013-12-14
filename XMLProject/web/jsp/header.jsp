@@ -23,7 +23,7 @@
     }
     .style27
     {
-        width: 290px;
+        width: 250px;
         height: 117px;
     }
     .style28
@@ -43,8 +43,8 @@
     }
     .textboxSearch
     {
-        color: #CCCCCC;
-        background-color: #E1ECF7;
+        /*        color: #CCCCCC;*/
+        /*        background-color: #E1ECF7;*/
         border-color: #333333;
         border-style: Double;
         height: 16px;
@@ -62,7 +62,7 @@
 
                     <img alt="" class="style28" src="./Image/banner.png" />
                 </td>
-                <td align="right">
+                <td align="right" width="25%">
                     <ul id="top-ul">
                         <div id="navBarGuess">
                             <div id="loginForm">
@@ -74,9 +74,9 @@
                                     <div id="loginStatus" class="onHide"></div>
                                     <button type="submit">Đăng ký</button>
                                 </form
-                                
+
                             </div>
-                            
+
                         </div>
                         <div id="navBarUser">
                             <li class="onHide" ><a id="Uitem0" href="#">${USERNAME}</a></li>
@@ -88,60 +88,59 @@
             </tr>
 
         </table>
-
-        <div id="menu" class="style1">
-            <ul id="menu-content" class="menu-content">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
-
-
-            </ul>
-        </div>
-        <div class="style1">
-            <br/>
-            <br/>
-            <br/>
-            <table >
-                <tr>
-                    <td width="45%" />
-                    <td width="55%">
-
-                        <span class="styleTextSearch">Tìm kiếm tên sản phẩm</span>
-                        <input ID="txtSearch" class="textboxSearch" />
-                        <img ID="btnSearch" src="./Image/search.png" OnClick="btnSearch_Click"
-                             Style="vertical-align: inherit"/>
-
-
-                    </td>
-                    <td>
-                        <table height="20" cellpadding="0" cellspacing="0" border="0" width="300px">
-                            <tr>
-                                <td align="left" width="5">
-                                    <img src="Image/cart1.png" />
-                                </td>
-                                <td align="center" width="40%" class="styleTextCart">
-                                    <a href="CheckOut.aspx" class="styleTextCart">GIỎ HÀNG</a>
-                                </td>
-                                <td align="left" width="5">
-                                    <img src="Image/Cost1.png" />
-                                </td>
-                                <td width="40%" align="center" class="styleTextCart">
-                                    <a href="CheckOut.aspx" style="font-weight: bold; text-decoration: none; color: #CCCCCC;
-                                       font-size: small">
-                                        <label runat="server" ID="label1" Text=""/>
-                                    </a>
-                                </td>
-                                <td align="left" width="5">
-                                    <img src="Image/Pay1.png" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>    
-
     </form>
+    <div id="menu" class="style1">
+        <ul id="menu-content" class="menu-content">
+            <li><a href="index.jsp">Trang chủ</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Liên hệ</a></li>
+
+
+        </ul>
+    </div>
+    <div class="style1">
+        <br/>
+        <br/>
+        <br/>
+        <table >
+            <tr>
+                <td width="45%" />
+                <td width="55%">
+                    <form>
+                        <span class="styleTextSearch">Tìm kiếm tên sản phẩm</span>
+                        <input name="txtSearch" class="textboxSearch" type ="text"/>
+                        <img ID="btnSearch" src="./Image/search.png" OnClick="jsUtils.btnSearch_Click(this.form.txtSearch.value);"
+                             Style="vertical-align: inherit; cursor: pointer"/>
+                    </form>
+
+                </td>
+                <td>
+                    <table height="20" cellpadding="0" cellspacing="0" border="0" width="300px">
+                        <tr>
+                            <td align="left" width="5">
+                                <img src="Image/cart1.png" />
+                            </td>
+                            <td align="center" width="40%" class="styleTextCart">
+                                <a href="showCart.jsp" class="styleTextCart">GIỎ HÀNG</a>
+                            </td>
+                            <td align="left" width="5">
+                                <img src="Image/Pay1.png" />
+                            </td>
+                            <td width="40%" align="center" class="styleTextCart">
+                                <a href="#" style="font-weight: bold; text-decoration: none; color: #CCCCCC;
+                                   font-size: small">
+                                    <span id="totalPrice">
+                                    </span>
+                                </a>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
 
 </div>

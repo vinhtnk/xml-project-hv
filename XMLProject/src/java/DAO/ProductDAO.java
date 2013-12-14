@@ -40,7 +40,7 @@ public class ProductDAO {
                 product.setProductID(rs.getString("ProductId"));
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
-                product.setPrice(rs.getFloat("Price"));
+                product.setPrice(rs.getInt("Price"));
                 product.setDescription(rs.getString("Description"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
@@ -80,7 +80,7 @@ public class ProductDAO {
                 product.setProductID(rs.getString("ProductId"));
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
-                product.setPrice(rs.getFloat("Price"));
+                product.setPrice(rs.getInt("Price"));
                 product.setDescription(rs.getString("Description"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
@@ -121,7 +121,7 @@ public class ProductDAO {
                 product.setProductID(rs.getString("ProductId"));
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
-                product.setPrice(rs.getFloat("Price"));
+                product.setPrice(rs.getInt("Price"));
                 product.setDescription(rs.getString("Description"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
@@ -162,7 +162,7 @@ public class ProductDAO {
                 product.setProductID(rs.getString("ProductId"));
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
-                product.setPrice(rs.getFloat("Price"));
+                product.setPrice(rs.getInt("Price"));
                 product.setDescription(rs.getString("Description"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
@@ -198,7 +198,7 @@ public class ProductDAO {
             stm.setString(1, product.getProductID());
             stm.setString(2, product.getProductID());
             stm.setInt(3, product.getCategoryID());
-            stm.setFloat(4, product.getPrice());
+            stm.setDouble(4, product.getPrice());
             stm.setString(5, product.getDescription());
             stm.setString(6, product.getImg_link());
             stm.setBoolean(7, product.isNew_product());
@@ -233,7 +233,7 @@ public class ProductDAO {
             stm = con.prepareStatement(query);
             stm.setString(1, product.getProductName());
             stm.setInt(2, product.getCategoryID());
-            stm.setFloat(3, product.getPrice());
+            stm.setInt(3, product.getPrice());
             stm.setString(4, product.getDescription());
             stm.setString(5, product.getImg_link());
             stm.setBoolean(6, product.isNew_product());

@@ -1,25 +1,15 @@
 <%-- 
-    Document   : index
-    Created on : Dec 2, 2013, 10:35:48 PM
+    Document   : showCart
+    Created on : Dec 14, 2013, 9:54:40 PM
     Author     : Hoang
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <%@page session="true" %>
-
-<jsp:useBean class="Utils.JAXBMarshalling" id="marshallerUtils" scope="request"/>
-
-<%
-            String webpath = application.getRealPath("/");
-            marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
-            marshallerUtils.marshallingProduct(webpath + "xml/products.xml");
-%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
 
 <link href="css/style.css" rel="stylesheet"/>
 
@@ -29,7 +19,7 @@
 <script type="text/javascript" src="js/validateUtils.js"></script>
 
 <script type="text/javascript" language="text/javascript">
-      
+
     function start(){
         if(typeof(sessionStorage) != "undefined"){
             if(sessionStorage.cart == null){
@@ -41,7 +31,7 @@
             alert("browser is not support storage!!!");
 
         }
-        
+
     }
 
 
@@ -70,9 +60,29 @@
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
-                        <div id="listItem">                            
-                            <jsp:include page="jsp/listProduct.jsp" flush="true"/>
-                        </div>
+                        <table id="itemCart" border="1" bgcolor="#9acd32">
+                            <tr>                               
+                                    <td>
+                                        No.
+                                    </td>
+                                    <td>
+                                        Mã sản phẩm
+                                    </td>
+                                    <td>
+                                        Tên sản phẩm
+                                    </td>
+                                    <td>
+                                        Số lượng
+                                    </td>
+                                    <td>
+                                        Giá
+                                    </td>
+                                    <td>
+                                        Xóa sản phẩm
+                                    </td>
+                            </tr>
+                            
+                        </table>
                     </td>
                 </tr>
 

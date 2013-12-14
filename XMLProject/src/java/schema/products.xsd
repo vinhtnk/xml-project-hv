@@ -18,7 +18,7 @@
             <xsd:element name="productID" type="xsd:integer" />
             <xsd:element name="productName" type="xsd:string" />
             <xsd:element name="categoryID" type="xsd:integer" />
-            <xsd:element name="price" type="xsd:float" />
+            <xsd:element name="price" type="xsd:integer" />
             <xsd:element name="description" type="xsd:string" />
             <xsd:element name="img_link" type="xsd:string" />
             <xsd:element name="new_product" type="xsd:boolean" />
