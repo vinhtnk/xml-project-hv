@@ -10,10 +10,10 @@
         font-size: large;
         font-weight: bold;
         border-bottom: 1px solid #5e5e5e;
-
+        padding-top: 10px;
     }
 </style>
-<form class="pure-skin-xml">
+<form class="category-form">
     <div class="pure-menu pure-menu-open">
         <span class="menuHeading">Danh mục sản phẩm</span>
         <ul id="leftPanel" class="leftPanel">

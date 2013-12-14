@@ -1,4 +1,5 @@
-function jsUtils() {   
+var jsUtils = function(){
+    
 }
 
 jsUtils.sessionUser = function(uinfo){
@@ -229,115 +230,155 @@ jsUtils.saveNumberOfItem = function(itemNoId,numOfSelectItem){
 }
 
 
-jsUtils.addToCart = function(itemNoId,isOnchange){
-    if(jsUtils.sessionUser().UID=="" || jsUtils.sessionUser().UID==undefined){
-        alert("You must login before add item(s) to cart.");
-        return;
-    }
-
-
+function addToCart(itemNoId,isOnchange){
     var rightPanel = document.getElementById("listAdded");
-    var moneyTotal = document.getElementById("moneyTotal");
+    var moneyTotal = document.getElementById("totalPrice");
     if(moneyTotal.innerText != ""){
         var tempMoneyTotal =  parseFloat(moneyTotal.innerText);
         //if remove when not available item on list
 
         if(document.getElementById(itemNoId) == null){
-            var priceOfItem = parseFloat(jsUtils.id("cart-"+itemNoId).children[1].children[1].innerText.replace("$",""));
+            var priceOfItem = parseFloat(jsUtils.id("cart-"+itemNoId).children[1].children[1].innerText.replace("VND",""));
         }else{
-            var priceOfItem = parseFloat(jsUtils.id(itemNoId).children[1].children[1].innerText.replace("$",""));
+            var priceOfItem = parseFloat(jsUtils.id(itemNoId).innerText.replace("VND",""));
         }
     
         var afterPrice = priceOfItem + tempMoneyTotal;
-        if(tempMoneyTotal> 500 ||  afterPrice > 500 && !isOnchange ){
-            alert("If you want to buy more than $500,please contact us follow info at the bottom of website.");
-            return;
-        }
-    }else{
-        var tempMoneyTotal =  0;
-    }
+      
 
-    var noId = itemNoId.split("-").pop();
-    //var noId = parseInt(itemNoId.replace("itemNo",""),10);
-    console.log("AddToCart function of NoID : " +noId );
-    if(document.getElementById(itemNoId)!= null){
-        var listChildNode = document.getElementById(itemNoId).innerHTML;
-    }else {
-        var listChildNode = document.getElementById("cart-"+itemNoId).innerHTML;
-    }
-    //check if availd or not
-    //also check if degree result less than 0
+        var noId = itemNoId.split("-").pop();
+        //var noId = parseInt(itemNoId.replace("itemNo",""),10);
+        console.log("AddToCart function of NoID : " +noId );
+        if(document.getElementById(itemNoId)!= null){
+            var listChildNode = document.getElementById(itemNoId).innerHTML;
+        }else {
+            var listChildNode = document.getElementById("cart-"+itemNoId).innerHTML;
+        }
+        //check if availd or not
+        //also check if degree result less than 0
     
-    if(!document.getElementById("cart-"+itemNoId)){
-        var rightItem = document.createElement("div");
-        rightItem.setAttribute("id", "cart-"+itemNoId);
-        rightItem.setAttribute("class", "right-item");
+        if(!document.getElementById("cart-"+itemNoId)){
+            var rightItem = document.createElement("div");
+            rightItem.setAttribute("id", "cart-"+itemNoId);
+            rightItem.setAttribute("class", "right-item");
 
-        rightItem.innerHTML = listChildNode.trim();
-        var descNode = rightItem.children[1].children[2];
-        descNode.parentNode.removeChild(descNode);
+            rightItem.innerHTML = listChildNode.trim();
+            var descNode = rightItem.children[1];
+            descNode.parentNode.removeChild(descNode);
 
-        //leftItem.appendChild(clonelistChildNode[0]);
-        // leftItem.appendChild(clonelistChildNode[0].children[1]);
+            //leftItem.appendChild(clonelistChildNode[0]);
+            // leftItem.appendChild(clonelistChildNode[0].children[1]);
 
-        var closeButton = document.createElement("a");
-        closeButton.setAttribute("href", "#");
-        closeButton.setAttribute("onclick", "jsUtils.removeFromCart('"+itemNoId+"');return false;");
-        closeButton.innerHTML  = "<img class='close-button' src='./img/button/closeButton.png'>";
+            var closeButton = document.createElement("a");
+            closeButton.setAttribute("href", "#");
+            closeButton.setAttribute("onclick", "jsUtils.removeFromCart('"+itemNoId+"');return false;");
+            closeButton.innerHTML  = "<img class='close-button' src='./Image/delete_icon.png'>";
 
 
-        var addedNumber = document.createElement("input");
-        addedNumber.setAttribute("type","number");
-        addedNumber.setAttribute("id", "NumberOfItem-"+noId);
-        addedNumber.setAttribute("class", "countNo");
-        addedNumber.setAttribute("name", "txtNum");
-        addedNumber.setAttribute("onclick", "this.select();");        
-        addedNumber.setAttribute("onchange", "validUtils.itemCheck(this.value,"+noId+");");   
-        addedNumber.value = 0;
+            var addedNumber = document.createElement("input");
+            addedNumber.setAttribute("type","number");
+            addedNumber.setAttribute("id", "NumberOfItem-"+noId);
+            addedNumber.setAttribute("class", "countNo");
+            addedNumber.setAttribute("name", "txtNum");
+            addedNumber.setAttribute("onclick", "this.select();");
+            addedNumber.setAttribute("onchange", "validUtils.itemCheck(this.value,"+noId+");");
+            addedNumber.value = 0;
 
-        rightItem.appendChild(closeButton);
-        rightItem.appendChild(addedNumber);
-        rightPanel.appendChild(rightItem);
-        if(jsUtils.hasClass(jsUtils.id('cartTotal'), "onHide")){
-            jsUtils.removeClass(document.getElementById('cartTotal'), "onHide");
-            document.getElementById("yourCart").className = "hasCart";
-        }
-    }
-    var currentItemId = document.getElementById("cart-"+itemNoId);
-    var totalOne  = 0;
-    var selectItemPrice = parseFloat(currentItemId.children[1].children[1].innerText.replace("$",""));
-    var numOfSelectItem = parseInt(currentItemId.children[3].value);
-    if(isOnchange){
-        var moneyTotalValue = 0;
-        var listLength = rightPanel.children.length;
-        for(var i = 0; i<listLength; i++ ){
-            if(currentItemId != rightPanel.children[i]){
-                var price = parseFloat(rightPanel.children[i].children[1].children[1].innerText.replace("$",""));
-                var numOfItem = parseInt(rightPanel.children[i].children[3].value);
-                totalOne = price*numOfItem;
-                moneyTotalValue+= totalOne;
-                totalOne  = 0;
+            rightItem.appendChild(closeButton);
+            rightItem.appendChild(addedNumber);
+            rightPanel.appendChild(rightItem);
+            if(jsUtils.hasClass(jsUtils.id('cartTotal'), "onHide")){
+                jsUtils.removeClass(document.getElementById('cartTotal'), "onHide");
+                document.getElementById("yourCart").className = "hasCart";
             }
         }
-        tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue ;
-        if(tempMoneyTotal>500 ){
-            numOfSelectItem = parseInt((500 - moneyTotalValue)/selectItemPrice,10);
-            tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue;
-            alert("If you want to buy more than $500,please contact us follow info at the bottom of website.");
+        var currentItemId = document.getElementById("cart-"+itemNoId);
+        var totalOne  = 0;
+        var selectItemPrice = parseFloat(currentItemId.children[1].children[1].innerText.replace("$",""));
+        var numOfSelectItem = parseInt(currentItemId.children[3].value);
+        if(isOnchange){
+            var moneyTotalValue = 0;
+            var listLength = rightPanel.children.length;
+            for(var i = 0; i<listLength; i++ ){
+                if(currentItemId != rightPanel.children[i]){
+                    var price = parseFloat(rightPanel.children[i].children[1].children[1].innerText.replace("$",""));
+                    var numOfItem = parseInt(rightPanel.children[i].children[3].value);
+                    totalOne = price*numOfItem;
+                    moneyTotalValue+= totalOne;
+                    totalOne  = 0;
+                }
+            }
+            tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue ;
+            if(tempMoneyTotal>500 ){
+                numOfSelectItem = parseInt((500 - moneyTotalValue)/selectItemPrice,10);
+                tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue;
+                alert("If you want to buy more than $500,please contact us follow info at the bottom of website.");
            
-        }
+            }
 
-    }else{
-        tempMoneyTotal += selectItemPrice;
-        numOfSelectItem++;
+        }else{
+            tempMoneyTotal += selectItemPrice;
+            numOfSelectItem++;
+        }
+        tempMoneyTotal = tempMoneyTotal.toFixed(2);
+        moneyTotal.innerText  = tempMoneyTotal;
+        currentItemId.children[3].value = numOfSelectItem;
+    //  jsUtils.saveNumberOfItem(itemNoId,numOfSelectItem);
+    
     }
-    tempMoneyTotal = tempMoneyTotal.toFixed(2);
-    moneyTotal.innerText  = tempMoneyTotal;
-    currentItemId.children[3].value = numOfSelectItem;
-//  jsUtils.saveNumberOfItem(itemNoId,numOfSelectItem);
-    
-    
 }
+
+function addToCartSes(id, name, price){
+    if(typeof(sessionStorage) != "undefined"){
+        
+        
+        var exist = false;
+        var cart = eval(sessionStorage.cart) ||[];
+        for(var i = 0; i < cart.length; i++){
+            if(cart[i].id == id){
+                cart[i].quantity++;                
+                exist = true;
+                cart[i].total = Number(cart[i].total) + Number(cart[i].price);
+            }
+            
+        }
+        if(!exist){
+            cart.push({
+                'id': id,
+                'name': name,
+                'price': price,
+                'quantity': 1,
+                'total': price
+            });
+        }
+        sessionStorage.cart = JSON.stringify(cart);
+
+        sessionStorage.totalPrice = Number(0);
+        for(var i = 0; i < cart.length; i++){
+            sessionStorage.totalPrice = Number(sessionStorage.totalPrice) + Number(cart[i].total);        
+        }
+       var ttp = sessionStorage.totalPrice;
+       
+        document.getElementById('totalPrice').innerHTML = Number(ttp).formatMoney(0);
+
+    //tp.setAttribute("text", "abc");
+        
+   
+    } else{
+        alert("browser is not support storage!!!");
+    }
+}
+
+Number.prototype.formatMoney = function(c, d, t){
+var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "," : t,
+    s = n < 0 ? "-" : "",
+    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
 
 jsUtils.showPopUp = function(itemNoId){
     // var selectId = document.getElementById(itemNoId);
@@ -347,6 +388,115 @@ jsUtils.showPopUp = function(itemNoId){
     jsUtils.removeClass(jsUtils.id('popUp'),"onHide");
     var Desc = jsUtils.id('popUp').children[1].children[0].children[1].children[2];
     jsUtils.removeClass(Desc, "onHide");
+}
+
+function filterByCategory(id){
+    window.event.preventDefault ? window.event.preventDefault() : window.event.returnValue = false;
+    
+    loadXML('get', 'xsl/products.xsl' , function(xsl){
+        var xslDoc = xsl;
+        loadXML('get', 'ProductsController?action=categoryFilter&categoryID='+id, function(xml){
+            var xmlDoc = parseXml(xml);
+            var html = transformXML_XSLT(xmlDoc, xslDoc);
+            document.getElementsByName('listItem').innerHTML = toString(html);
+        })
+    })
+}
+
+jsUtils.btnSearch_Click = function(){
+    //txtSearch = document.getElementById("txtSearch");
+    alert("txtSearch");
+}
+
+function loadXML(type, path, callback, data) {
+    var request;
+    if (window.XMLHttpRequest) {
+        request = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        try {
+            request = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e1) {
+            try {
+                request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e2) {
+            }
+        }
+    }
+    if (!request) {
+        throw "No ajax support.";
+        return false;
+    }
+
+    // Upon completion of the request, execute the callback.
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                var cType = request.getResponseHeader('content-type');
+                if (cType.indexOf('xml') > 0 && request.responseXML){
+                    callback( request.responseXML );
+                } else {
+                    callback( request.responseText );
+                }
+            } else {
+                throw "Could not load " + path;
+            }
+        }
+    };
+    request.open(type, path);
+    request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    if (!data){
+        request.send();
+    } else{
+        request.send(data);
+    }
+}
+
+function parseXml(xmlString) {
+    var dom = null;
+    if (window.DOMParser) {
+        try {
+            dom = (new DOMParser()).parseFromString(xmlString, "text/xml");
+        }
+        catch (e) {
+            dom = null;
+        }
+    } else if (window.ActiveXObject) {
+        try {
+            dom = new ActiveXObject('Microsoft.XMLDOM');
+            dom.async = false;
+            if (!dom.loadXML(xmlString)) // parse error ..
+                throw dom.parseError.reason + dom.parseError.srcText;
+        }
+        catch (e) {
+            dom = null;
+        }
+    } else throw "cannot parse xml string!";
+    return dom;
+}
+
+function transformXML_XSLT(doc,xslt, param){
+    try{
+        var result = '';
+        if(window.ActiveXObject){
+            result = doc.transformNode(xslt);
+        }else{
+            var xsltProcessor=new XSLTProcessor();
+            xsltProcessor.importStylesheet(xslt);
+            if (param){
+                xsltProcessor.setParameter(null, param.name, param.value);
+            }
+            result = xsltProcessor.transformToFragment(doc, document);
+        }
+        return result;
+    } catch (exception) {
+        if (typeof (exception) == "object") {
+            if (exception.message) {
+                throw exception.message;
+            }
+        } else {
+            throw exception;
+        }
+    }
 }
 
 var ajaxFunction = function(req,callback) {
@@ -383,3 +533,6 @@ var ajaxFunction = function(req,callback) {
     }
 
 }
+
+
+

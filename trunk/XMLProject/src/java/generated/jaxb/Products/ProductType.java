@@ -51,7 +51,8 @@ public class ProductType {
     protected String productName;
     @XmlElement(required = true)
     protected BigInteger categoryID;
-    protected float price;
+    @XmlElement(required = true)
+    protected int price;
     @XmlElement(required = true)
     protected String description;
     @XmlElement(name = "img_link", required = true)
@@ -143,7 +144,7 @@ public class ProductType {
      * Sets the value of the price property.
      * 
      */
-    public void setPrice(float value) {
+    public void setPrice(int value) {
         this.price = value;
     }
 

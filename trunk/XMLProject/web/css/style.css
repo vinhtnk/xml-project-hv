@@ -26,6 +26,20 @@ body {
     color:#0f0f0f;
     line-height:20px
 }
+
+.body5
+{
+    width: 100%;
+    background: url(Image/bg_main.jpg) 0 0 repeat;
+    min-height: 320px;
+}
+.borderMainMenu{
+    
+    border-left: 1px solid #114646;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
 .ic, .ic a {
     border:0;
     float:right;
@@ -233,33 +247,33 @@ ul.leftPanel ul.leftPanel li {
 }
 
 ul.leftPanel, ul.ex_menu {
-	margin:0;
-	padding:0;
-	color: Black;
-	list-style:none;
+    margin:0;
+    padding:0;
+    color: Black;
+    list-style:none;
 }
 ul.leftPanel li, ul.ex_menu li {
-	margin:0;
+    margin:0;
 }
 ul.leftPanel li {
-	padding:2px 0 2px 15px;
+    padding:2px 0 2px 15px;
 }
 ul.ex_menu li {
-	padding:2px 0 2px 15px;
+    padding:2px 0 2px 15px;
 }
 ul.leftPanel li a, ul.ex_menu li a {
-	display:block;
-	color: #333333;
-	text-decoration:none;
-        
-	padding:5px;
-	margin-left:-15px;
-	padding-left:15px;
-        text-align: left;
+    display:block;
+    color: #333333;
+    text-decoration:none;
+
+    padding:5px;
+    margin-left:-15px;
+    padding-left:15px;
+    text-align: left;
 }
 ul.leftPanel li a:hover, ul.ex_menu li a:hover{
-	color:#FFF;
-	background:#C8DAE6;
+    color:#FFF;
+    background:#C8DAE6;
 }
 
 ul.leftPanel li.active a {
@@ -268,7 +282,7 @@ ul.leftPanel li.active a {
 }
 
 ul.leftPanel li a:hover {
-	text-decoration:none;
+    text-decoration:none;
 }
 
 ul.ex_menu li {
@@ -291,6 +305,27 @@ ul.content_menu li a:hover {
 }
 ul.ex_menu li a:hover {
     text-decoration:none;
+}
+
+ol
+{
+    width: 700px;
+}
+
+
+ol li
+{
+    float: left;
+    width: 350px;
+    max-height: 226px;
+    min-height: 226px;
+    list-style: none;
+    position: relative;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
 }
 
 .roundabout-holder {
@@ -639,5 +674,27 @@ nav ul,nav ol {
     width: 80%;
     height: 80%;
     max-width: 200px;
-    max-height: 230px;
+    max-height: 220px;
+    min-width: 200px;
+    min-height: 220px;
+    cursor: pointer;
+}
+
+.price{
+    color: red;
+    font-weight: bold;
+}
+
+.imgCart{
+    /*    min-width: 80px;*/
+    min-height: 20px;
+}
+
+.tableItem{
+    border: 1px solid #878989;
+    width: 350px;
+}
+
+.category-form{
+    width: 200px;
 }
