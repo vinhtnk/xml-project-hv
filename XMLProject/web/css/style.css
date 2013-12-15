@@ -695,6 +695,10 @@ nav ul,nav ol {
     width: 350px;
 }
 
+.allPrice{
+   font-weight: bold;
+}
+
 .category-form{
     width: 200px;
 }
