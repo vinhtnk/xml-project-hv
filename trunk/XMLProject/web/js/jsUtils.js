@@ -357,7 +357,7 @@ function addToCartSes(id, name, price){
         for(var i = 0; i < cart.length; i++){
             sessionStorage.totalPrice = Number(sessionStorage.totalPrice) + Number(cart[i].total);        
         }
-       var ttp = sessionStorage.totalPrice;
+        var ttp = sessionStorage.totalPrice;
        
         document.getElementById('totalPrice').innerHTML = Number(ttp).formatMoney(0);
 
@@ -369,16 +369,66 @@ function addToCartSes(id, name, price){
     }
 }
 
+function addRow(tableId, items){
+    var tableElement = document.getElementById(tableId);
+    var newCell;
+    var col=0;
+    var newRow;
+    
+    for(var i=0; i<items.length;i++){
+        
+        newRow = tableElement.insertRow(tableElement.rows.length);
+        newRow.setAttribute("align", "center");
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = ++col;
+        
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = items[i].id;
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = items[i].name;
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = "<input id='txtquantity' type='text' value='" + items[i].quantity +"' style='max-width: 24px'/>";
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = Number(items[i].price).formatMoney(0);
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = Number(items[i].total).formatMoney(0);
+        newCell = newRow.insertCell(newRow.cells.length);
+        newCell.innerHTML = "<input type='checkbox' name='cbRemove' value='OFF' />";
+    }
+    newRow = tableElement.insertRow(tableElement.rows.length);
+
+    newCell = newRow.insertCell(newRow.cells.length);
+    newCell.setAttribute("colspan", "6");
+    newCell.setAttribute("align", "right");
+    newCell.innerHTML = "<span class='allPrice'>Thành tiền: " + Number(sessionStorage.totalPrice).formatMoney(0) + "</span>";
+
+    return newRow;
+}
+
+function showCart(items, tableID){
+    
+    if(typeof(sessionStorage) != "undefined"){
+            addRow(tableID, items);                  
+        } else{
+            alert("browser is not support storage!!!");
+
+        }
+}
+
+function updateCart(items){
+
+}
+
 Number.prototype.formatMoney = function(c, d, t){
-var n = this,
+    var n = this,
     c = isNaN(c = Math.abs(c)) ? 2 : c,
     d = d == undefined ? "." : d,
     t = t == undefined ? "," : t,
     s = n < 0 ? "-" : "",
     i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
     j = (j = i.length) > 3 ? j % 3 : 0;
-   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
- };
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 jsUtils.showPopUp = function(itemNoId){
     // var selectId = document.getElementById(itemNoId);

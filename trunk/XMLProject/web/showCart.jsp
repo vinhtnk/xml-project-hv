@@ -20,7 +20,7 @@
 
 <script type="text/javascript" language="text/javascript">
 
-    function start(){
+    function start(tableID){
         if(typeof(sessionStorage) != "undefined"){
             if(sessionStorage.cart == null){
                 document.getElementById('totalPrice').innerHTML = 0;
@@ -31,7 +31,8 @@
             alert("browser is not support storage!!!");
 
         }
-
+        var items = eval(sessionStorage.cart);
+        showCart(items, tableID);
     }
 
 
@@ -46,7 +47,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>H2 Store</title>
     </head>
-    <body onload="start()">
+    <body onload="start('itemCart')">
         <div id="header">
             <jsp:include page="jsp/header.jsp"/>
         </div>
@@ -56,12 +57,12 @@
                     <td align="left" valign="top" width="200px">
                         <div id="b-left-panel" class="mainBody" align="center">
                             <jsp:include page="jsp/leftmenu.jsp"/>
-
+                            
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
-                        <table id="itemCart" border="1" bgcolor="#9acd32">
-                            <tr>                               
+                        <table id="itemCart" border="1" align="center">
+                            <tr bgcolor="#9acd32" align="center" style="font-weight: bold">
                                     <td>
                                         No.
                                     </td>
@@ -75,7 +76,10 @@
                                         Số lượng
                                     </td>
                                     <td>
-                                        Giá
+                                        Đơn giá
+                                    </td>
+                                    <td>
+                                        Tổng cộng
                                     </td>
                                     <td>
                                         Xóa sản phẩm
@@ -83,9 +87,16 @@
                             </tr>
                             
                         </table>
+                        <br/>
+                        <div align="center">
+                        <input type="submit" value="Cập nhật" name="btnUpdateCart" />
+                        <input type="submit" value="Đặt hàng" name="btnCheckOut" />
+                       
+                        </div>
                     </td>
+                    
                 </tr>
-
+                
             </table>
 
 
