@@ -5,7 +5,7 @@
 
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.util.Date;
 public class OrderDTO {
     private int orderID;
     private String email;
-    private float totalPrice;
+    private int totalPrice;
     private Date orderDate;
     private Date receiveDate;
     private String note;
@@ -23,7 +23,7 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(int orderID, String email, float totalPrice, Date orderDate, Date receiveDate, String note, String status) {
+    public OrderDTO(int orderID, String email, int totalPrice, Date orderDate, Date receiveDate, String note, String status) {
         this.orderID = orderID;
         this.email = email;
         this.totalPrice = totalPrice;
@@ -81,11 +81,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public float getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 

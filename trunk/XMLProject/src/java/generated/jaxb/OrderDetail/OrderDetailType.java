@@ -49,7 +49,7 @@ public class OrderDetailType {
     protected String productName;
     @XmlElement(required = true)
     protected BigInteger quantity;
-    protected float price;
+    protected int price;
 
     /**
      * Gets the value of the orderID property.
@@ -151,7 +151,7 @@ public class OrderDetailType {
      * Gets the value of the price property.
      * 
      */
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -159,7 +159,7 @@ public class OrderDetailType {
      * Sets the value of the price property.
      * 
      */
-    public void setPrice(float value) {
+    public void setPrice(int value) {
         this.price = value;
     }
 

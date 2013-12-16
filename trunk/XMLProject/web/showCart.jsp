@@ -1,22 +1,15 @@
-<%-- 
-    Document   : showCart
-    Created on : Dec 14, 2013, 9:54:40 PM
-    Author     : Hoang
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <%@page session="true" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <link href="css/style.css" rel="stylesheet"/>
 
-<script type="text/javascript" src="js/callAjax.js"></script>
+
 <script type="text/javascript" src="js/jsUtils.js"></script>
-<script type="text/javascript" src="js/pageTransfer.js"></script>
-<script type="text/javascript" src="js/validateUtils.js"></script>
+
 
 <script type="text/javascript" language="text/javascript">
 
@@ -32,6 +25,14 @@
 
         }
         var items = eval(sessionStorage.cart);
+        
+        if(items.length == 0 || sessionStorage.cart == null){
+            document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
+            document.getElementById('itemCart').deleteRow(1);
+        }
+        if(sessionStorage.totalPrice == 0){
+            document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
+        }
         showCart(items, tableID);
     }
 
@@ -57,46 +58,47 @@
                     <td align="left" valign="top" width="200px">
                         <div id="b-left-panel" class="mainBody" align="center">
                             <jsp:include page="jsp/leftmenu.jsp"/>
-                            
+
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
                         <table id="itemCart" border="1" align="center">
                             <tr bgcolor="#9acd32" align="center" style="font-weight: bold">
-                                    <td>
-                                        No.
-                                    </td>
-                                    <td>
-                                        Mã sản phẩm
-                                    </td>
-                                    <td>
-                                        Tên sản phẩm
-                                    </td>
-                                    <td>
-                                        Số lượng
-                                    </td>
-                                    <td>
-                                        Đơn giá
-                                    </td>
-                                    <td>
-                                        Tổng cộng
-                                    </td>
-                                    <td>
-                                        Xóa sản phẩm
-                                    </td>
+                                <td>
+                                    No.
+                                </td>
+                                <td>
+                                    Mã sản phẩm
+                                </td>
+                                <td>
+                                    Tên sản phẩm
+                                </td>
+                                <td>
+                                    Số lượng
+                                </td>
+                                <td>
+                                    Đơn giá
+                                </td>
+                                <td>
+                                    Tổng cộng
+                                </td>
+                                <td>
+                                    Xóa sản phẩm
+                                </td>
                             </tr>
-                            
+
                         </table>
                         <br/>
                         <div align="center">
-                        <input type="submit" value="Cập nhật" name="btnUpdateCart" />
-                        <input type="submit" value="Đặt hàng" name="btnCheckOut" />
-                       
+                            <form>
+                                <input type="submit" id="btnCheckOut" value="Đặt hàng" name="btnCheckOut" onclick="checkout();"/>
+                            </form>
+                            
                         </div>
                     </td>
-                    
+
                 </tr>
-                
+
             </table>
 
 

@@ -2,6 +2,7 @@
 package generated.jaxb.Orders;
 
 import java.math.BigInteger;
+import java.sql.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -51,7 +52,7 @@ public class OrderType {
     protected BigInteger orderID;
     @XmlElement(required = true)
     protected String email;
-    protected float totalPrice;
+    protected int totalPrice;
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar orderDate;
@@ -115,7 +116,7 @@ public class OrderType {
      * Gets the value of the totalPrice property.
      * 
      */
-    public float getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
@@ -123,7 +124,7 @@ public class OrderType {
      * Sets the value of the totalPrice property.
      * 
      */
-    public void setTotalPrice(float value) {
+    public void setTotalPrice(int value) {
         this.totalPrice = value;
     }
 

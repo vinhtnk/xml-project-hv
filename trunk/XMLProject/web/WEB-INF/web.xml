@@ -16,6 +16,10 @@
         <servlet-name>ProductsController</servlet-name>
         <servlet-class>Controller.ProductsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>Controller.CartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AppWebService</servlet-name>
         <url-pattern>/AppWebService</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>ProductsController</servlet-name>
         <url-pattern>/ProductsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/CartController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

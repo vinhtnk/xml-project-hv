@@ -6,6 +6,8 @@
 package Utils;
 
 import generated.jaxb.Categories.Categories;
+import generated.jaxb.OrderDetail.OrderDetails;
+import generated.jaxb.Orders.Orders;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,32 @@ public class JAXBUnmarshalling {
             File file = new File(sourceXML);
             Categories categories  = (Categories) unmarshaller.unmarshal(file);
             return categories;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Orders unmarshallingOrders(String sourceXML){
+        try {
+            JAXBContext ctx = JAXBContext.newInstance(Orders.class);
+            Unmarshaller unmarshaller = ctx.createUnmarshaller();
+            File file = new File(sourceXML);
+            Orders orders  = (Orders) unmarshaller.unmarshal(file);
+            return orders;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static OrderDetails unmarshallingOrderDetails(String sourceXML){
+        try {
+            JAXBContext ctx = JAXBContext.newInstance(OrderDetails.class);
+            Unmarshaller unmarshaller = ctx.createUnmarshaller();
+            File file = new File(sourceXML);
+            OrderDetails orderDetails  = (OrderDetails) unmarshaller.unmarshal(file);
+            return orderDetails;
         } catch (Exception e) {
             e.printStackTrace();
         }
