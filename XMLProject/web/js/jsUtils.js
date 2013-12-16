@@ -2,6 +2,9 @@ var jsUtils = function(){
     
 }
 
+
+
+
 jsUtils.sessionUser = function(uinfo){
     if(uinfo){
         
@@ -23,10 +26,7 @@ jsUtils.id= function(id){
     return document.getElementById(id);
 }
 
-jsUtils.setDefaultPageId = function(){
-    sessionStorage.setItem("currentPage","listItem");
-    sessionStorage.setItem("previousPage","");
-}
+
 
 jsUtils.previousPageId = function(){
     return sessionStorage.getItem("previousPage");
@@ -42,24 +42,6 @@ jsUtils.showHidePage = function(thisPage){
 
 };
 
-jsUtils.showNewPage = function(nextPageId){
-    var currentPage = jsUtils.currentPageId();
-    if(currentPage == nextPageId){
-        return;
-    }
-    this.ele = document.getElementById(currentPage);
-    jsUtils.removeClass(this.ele, "onShow" );
-    jsUtils.addClass(this.ele, "onHide" );
-
-    this.ele = document.getElementById(nextPageId);
-    jsUtils.removeClass(this.ele, "onHide" );
-    jsUtils.addClass(this.ele, "onShow");
-
-    sessionStorage.setItem("previousPage",currentPage);
-    sessionStorage.setItem("currentPage",nextPageId);
-    
-
-}
 
 jsUtils.hasClass = function(ele, className){
     return new RegExp(' ' + className + ' ').test(' ' + ele.className + ' ');
@@ -120,72 +102,8 @@ jsUtils.checkType = function(isSession){
     }
 }
    
-jsUtils.setGenreName = function(GenreName){
-    document.getElementById("genreSelect").innerText = "[ "+GenreName+" ]";
-    document.getElementById("genreSelect").textContent = "[ "+GenreName+" ]";
-}
 
 
-jsUtils.paging = function(divFather,numberItem){
-    var childLength = document.getElementById(divFather).children.length;
-    var ul = document.getElementById("paging-ul");
-    if(ul.children.length >0){
-        var divClear = document.getElementById("divClear");
-        ul.removeChild(divClear);
-    }
-    var div = document.createElement("div");
-    div.setAttribute("id", "divClear");
-    ul.appendChild(div);
-    if(childLength > numberItem){
-        var pageNum = parseInt(childLength / numberItem,10) +1;
-    }else {
-        var pageNum = 1;
-    }
-    for(var i =1; i<= pageNum+1; i++){
-        
-        var li = document.createElement("li");
-        li.setAttribute("id", "page"+i);
-        var a = document.createElement("a");
-        a.className = "pure-button";
-        a.href ="";
-        if(i==pageNum+1){
-            a.className +=" pageStatus";
-            a.innerHTML = "-[ 1 ]-";
-            a.setAttribute("onclick", "return false;");
-
-        }else{
-            a.innerText = i;
-            a.setAttribute("onclick", "jsUtils.gotoPage('"+divFather+"',"+numberItem+","+i+");return false;");
-        }
-        
-        li.appendChild(a);
-        div.appendChild(li);
-        this.pageStatus = pageNum+1;
-    }
-    jsUtils.gotoPage(divFather,numberItem,1);
-
-}
-
-jsUtils.gotoPage = function(divFather,numberItem, pageNum){
-    var childLength = document.getElementById(divFather).children.length;
-    document.getElementById("page"+this.pageStatus).firstChild.innerText = "-[ "+pageNum+" ]-"
-    if(childLength < numberItem){
-        return;
-    }else{
-        var startShow = numberItem * (pageNum-1);
-        var endShow = startShow + numberItem-1;
-        if(endShow>childLength)
-            endShow = childLength;
-        for(i=0;i<childLength;i++){
-            if(i<startShow || i>(endShow)){
-                jsUtils.addClass(document.getElementById(divFather).children[i],"onHide");
-            }else{
-                jsUtils.removeClass(document.getElementById(divFather).children[i],"onHide");
-            }
-        }
-    }
-    
-}
 
 jsUtils.removeFromCart = function(itemNoId){
     var noId = itemNoId.split("-").pop();
@@ -201,130 +119,18 @@ jsUtils.removeFromCart = function(itemNoId){
     
 }
 
-jsUtils.saveCart=function(itemNoId,numOfSelectItem){
-    if(!this.inCart){
-        this.inCart = [];
-        this.addedItem = [];
-    }
-    if(!this.inCart[itemNoId]){
-        this.addedItem.push(itemNoId);
-    }
-    this.inCart[itemNoId] = numOfSelectItem;
-    if(this.inCart[itemNoId] == 0){
-        for(var i = 0; i < this.addedItem.length; i++ ){
-            if(this.addedItem[i] == itemNoId){
-                this.addedItem.splice(i,1);
-            }
-        }
-    }
-    
-}
-jsUtils.getSaveCartHTML = function(){
-    var saveCart = document.getElementById("top-right-panel").innerHTML;  
-}
-
-jsUtils.saveNumberOfItem = function(itemNoId,numOfSelectItem){
-    if(!this.numberItem){
-        return;
-    }
-}
 
 
-function addToCart(itemNoId,isOnchange){
-    var rightPanel = document.getElementById("listAdded");
-    var moneyTotal = document.getElementById("totalPrice");
-    if(moneyTotal.innerText != ""){
-        var tempMoneyTotal =  parseFloat(moneyTotal.innerText);
-        //if remove when not available item on list
-
-        if(document.getElementById(itemNoId) == null){
-            var priceOfItem = parseFloat(jsUtils.id("cart-"+itemNoId).children[1].children[1].innerText.replace("VND",""));
+function start(){
+    if(typeof(sessionStorage) != "undefined"){
+        if(sessionStorage.cart == null){
+            document.getElementById('totalPrice').innerHTML = 0;
         }else{
-            var priceOfItem = parseFloat(jsUtils.id(itemNoId).innerText.replace("VND",""));
+            document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
         }
-    
-        var afterPrice = priceOfItem + tempMoneyTotal;
-      
+    } else{
+        alert("Your browser is not support storage.");
 
-        var noId = itemNoId.split("-").pop();
-        //var noId = parseInt(itemNoId.replace("itemNo",""),10);
-        console.log("AddToCart function of NoID : " +noId );
-        if(document.getElementById(itemNoId)!= null){
-            var listChildNode = document.getElementById(itemNoId).innerHTML;
-        }else {
-            var listChildNode = document.getElementById("cart-"+itemNoId).innerHTML;
-        }
-        //check if availd or not
-        //also check if degree result less than 0
-    
-        if(!document.getElementById("cart-"+itemNoId)){
-            var rightItem = document.createElement("div");
-            rightItem.setAttribute("id", "cart-"+itemNoId);
-            rightItem.setAttribute("class", "right-item");
-
-            rightItem.innerHTML = listChildNode.trim();
-            var descNode = rightItem.children[1];
-            descNode.parentNode.removeChild(descNode);
-
-            //leftItem.appendChild(clonelistChildNode[0]);
-            // leftItem.appendChild(clonelistChildNode[0].children[1]);
-
-            var closeButton = document.createElement("a");
-            closeButton.setAttribute("href", "#");
-            closeButton.setAttribute("onclick", "jsUtils.removeFromCart('"+itemNoId+"');return false;");
-            closeButton.innerHTML  = "<img class='close-button' src='./Image/delete_icon.png'>";
-
-
-            var addedNumber = document.createElement("input");
-            addedNumber.setAttribute("type","number");
-            addedNumber.setAttribute("id", "NumberOfItem-"+noId);
-            addedNumber.setAttribute("class", "countNo");
-            addedNumber.setAttribute("name", "txtNum");
-            addedNumber.setAttribute("onclick", "this.select();");
-            addedNumber.setAttribute("onchange", "validUtils.itemCheck(this.value,"+noId+");");
-            addedNumber.value = 0;
-
-            rightItem.appendChild(closeButton);
-            rightItem.appendChild(addedNumber);
-            rightPanel.appendChild(rightItem);
-            if(jsUtils.hasClass(jsUtils.id('cartTotal'), "onHide")){
-                jsUtils.removeClass(document.getElementById('cartTotal'), "onHide");
-                document.getElementById("yourCart").className = "hasCart";
-            }
-        }
-        var currentItemId = document.getElementById("cart-"+itemNoId);
-        var totalOne  = 0;
-        var selectItemPrice = parseFloat(currentItemId.children[1].children[1].innerText.replace("$",""));
-        var numOfSelectItem = parseInt(currentItemId.children[3].value);
-        if(isOnchange){
-            var moneyTotalValue = 0;
-            var listLength = rightPanel.children.length;
-            for(var i = 0; i<listLength; i++ ){
-                if(currentItemId != rightPanel.children[i]){
-                    var price = parseFloat(rightPanel.children[i].children[1].children[1].innerText.replace("$",""));
-                    var numOfItem = parseInt(rightPanel.children[i].children[3].value);
-                    totalOne = price*numOfItem;
-                    moneyTotalValue+= totalOne;
-                    totalOne  = 0;
-                }
-            }
-            tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue ;
-            if(tempMoneyTotal>500 ){
-                numOfSelectItem = parseInt((500 - moneyTotalValue)/selectItemPrice,10);
-                tempMoneyTotal = (selectItemPrice * numOfSelectItem) + moneyTotalValue;
-                alert("If you want to buy more than $500,please contact us follow info at the bottom of website.");
-           
-            }
-
-        }else{
-            tempMoneyTotal += selectItemPrice;
-            numOfSelectItem++;
-        }
-        tempMoneyTotal = tempMoneyTotal.toFixed(2);
-        moneyTotal.innerText  = tempMoneyTotal;
-        currentItemId.children[3].value = numOfSelectItem;
-    //  jsUtils.saveNumberOfItem(itemNoId,numOfSelectItem);
-    
     }
 }
 
@@ -387,13 +193,16 @@ function addRow(tableId, items){
         newCell = newRow.insertCell(newRow.cells.length);
         newCell.innerHTML = items[i].name;
         newCell = newRow.insertCell(newRow.cells.length);
-        newCell.innerHTML = "<input id='txtquantity' type='text' value='" + items[i].quantity +"' style='max-width: 24px'/>";
+        newCell.innerHTML = "<input id='txtquantity' type='text' value='" + items[i].quantity 
+        +"' style='max-width: 24px' onchange=\"updateCart('"+ items[i].id +"\')\"/>";
         newCell = newRow.insertCell(newRow.cells.length);
         newCell.innerHTML = Number(items[i].price).formatMoney(0);
         newCell = newRow.insertCell(newRow.cells.length);
         newCell.innerHTML = Number(items[i].total).formatMoney(0);
         newCell = newRow.insertCell(newRow.cells.length);
-        newCell.innerHTML = "<input type='checkbox' name='cbRemove' value='OFF' />";
+        newCheckbox = newCell.insert
+        newCell.innerHTML = "<input type='checkbox' name='cbRemove' value='OFF' onclick=\"removeCartItem('"+ items[i].id +"\')\"/>";
+        
     }
     newRow = tableElement.insertRow(tableElement.rows.length);
 
@@ -408,16 +217,63 @@ function addRow(tableId, items){
 function showCart(items, tableID){
     
     if(typeof(sessionStorage) != "undefined"){
-            addRow(tableID, items);                  
-        } else{
-            alert("browser is not support storage!!!");
+        addRow(tableID, items);
+    } else{
+        alert("Your browser is not support storage.");
 
+    }
+}
+
+function removeCartItem(id){
+    //window.event.preventDefault ? window.event.preventDefault() : window.event.returnValue = false;
+    
+    var cart = eval(sessionStorage.cart);
+    var ttp = eval(sessionStorage.totalPrice);
+    for(var i = 0; i < cart.length; i++){
+        if(cart[i].id == id){
+            //totalPrice = 0;
+            //totalQuantity = 0;
+            cart.splice(i, 1);
+            sessionStorage.cart = JSON.stringify(cart);
+            
         }
+    }
+    
+    sessionStorage.totalPrice = Number(0);
+    for(var i = 0; i < cart.length; i++){
+        sessionStorage.totalPrice = Number(sessionStorage.totalPrice) + Number(cart[i].total);
+    }
+    
+    location.reload();
+   
 }
 
-function updateCart(items){
 
+function updateCart(id){
+    var e = window.event;
+    var el = e.srcElement || e.target;
+    var quantity = el.value;
+    if(quantity <= 0 || quantity >= 1000){
+        el.value = oldQuantity;
+        return;
+    }
+    var cart = eval(sessionStorage.cart);
+    for(var i = 0; i < cart.length; i++){
+        if(cart[i].id == id){
+            cart[i].quantity = quantity;
+            cart[i].total = cart[i].quantity*cart[i].price;
+            sessionStorage.cart = JSON.stringify(cart);
+            
+        }
+    }
+    sessionStorage.totalPrice = Number(0);
+    for(var i = 0; i < cart.length; i++){
+        sessionStorage.totalPrice = Number(sessionStorage.totalPrice) + Number(cart[i].total);
+    }
+    location.reload();
 }
+
+
 
 Number.prototype.formatMoney = function(c, d, t){
     var n = this,
@@ -440,65 +296,13 @@ jsUtils.showPopUp = function(itemNoId){
     jsUtils.removeClass(Desc, "onHide");
 }
 
-function filterByCategory(id){
-    window.event.preventDefault ? window.event.preventDefault() : window.event.returnValue = false;
-    
-    loadXML('get', 'xsl/products.xsl' , function(xsl){
-        var xslDoc = xsl;
-        loadXML('get', 'ProductsController?action=categoryFilter&categoryID='+id, function(xml){
-            var xmlDoc = parseXml(xml);
-            var html = transformXML_XSLT(xmlDoc, xslDoc);
-            document.getElementsByName('listItem').innerHTML = toString(html);
-        })
-    })
-}
 
-jsUtils.btnSearch_Click = function(){
+function btnSearch_Click(){
     //txtSearch = document.getElementById("txtSearch");
-    alert("txtSearch");
-}
+    var key = document.getElementById('txtSearch').value;
+    window.location.href="searchProduct.jsp?Condition=Search&Val="+key;
 
-function loadXML(type, path, callback, data) {
-    var request;
-    if (window.XMLHttpRequest) {
-        request = new XMLHttpRequest();
-    } else if (window.ActiveXObject) {
-        try {
-            request = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e1) {
-            try {
-                request = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e2) {
-            }
-        }
-    }
-    if (!request) {
-        throw "No ajax support.";
-        return false;
-    }
-
-    // Upon completion of the request, execute the callback.
-    request.onreadystatechange = function () {
-        if (request.readyState === 4) {
-            if (request.status === 200) {
-                var cType = request.getResponseHeader('content-type');
-                if (cType.indexOf('xml') > 0 && request.responseXML){
-                    callback( request.responseXML );
-                } else {
-                    callback( request.responseText );
-                }
-            } else {
-                throw "Could not load " + path;
-            }
-        }
-    };
-    request.open(type, path);
-    request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    if (!data){
-        request.send();
-    } else{
-        request.send(data);
-    }
+    
 }
 
 function parseXml(xmlString) {
@@ -524,32 +328,89 @@ function parseXml(xmlString) {
     return dom;
 }
 
-function transformXML_XSLT(doc,xslt, param){
-    try{
-        var result = '';
-        if(window.ActiveXObject){
-            result = doc.transformNode(xslt);
-        }else{
-            var xsltProcessor=new XSLTProcessor();
-            xsltProcessor.importStylesheet(xslt);
-            if (param){
-                xsltProcessor.setParameter(null, param.name, param.value);
-            }
-            result = xsltProcessor.transformToFragment(doc, document);
-        }
-        return result;
+
+function getXmlHttpObject(){
+    var xmlHttp = null;
+    try {
+        xmlHttp = new XMLHttpRequest();
     } catch (exception) {
-        if (typeof (exception) == "object") {
-            if (exception.message) {
-                throw exception.message;
-            }
-        } else {
-            throw exception;
+        try {
+            xmlHttp = new ActiveXObject("Msxm12.XMLHTTP");
+        } catch (exception) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
+
     }
+    return xmlHttp;
 }
 
-var ajaxFunction = function(req,callback) {
+function createOrderXML(){
+    var orderXMLDOM = "<orders>";    
+    orderXMLDOM += "<order>";
+    orderXMLDOM += "<orderID></orderID>";
+    orderXMLDOM += "<email>abc</email>";
+    orderXMLDOM += "<price>" + sessionStorage.totalPrice + "</price>";
+    orderXMLDOM += "</order>";
+    orderXMLDOM += "</orders>";
+    return orderXMLDOM;
+}
+
+function createOrderDetailsXML(){
+
+    var orderDetailsXMLDOM = "<orderDetails>";
+    
+    var cart = eval(sessionStorage.cart);
+    for(var i = 0; i < cart.length; i++){
+        orderDetailsXMLDOM += "<orderDetail>";
+        orderDetailsXMLDOM += "<orderID></orderID>";
+        orderDetailsXMLDOM += "<productID>"+ cart[i].id +"</productID>";
+        orderDetailsXMLDOM += "<productName>"+ cart[i].name +"</productName>";
+        orderDetailsXMLDOM += "<quantity>"+ cart[i].quantity +"</quantity>";
+        orderDetailsXMLDOM += "<price>"+ cart[i].price +"</price>";
+        orderDetailsXMLDOM += "</orderDetail>";
+    }
+    orderDetailsXMLDOM += "</orderDetails>";
+    return orderDetailsXMLDOM;
+}
+
+function checkout(callback){
+    xmlHttp = getXmlHttpObject();
+    if(xmlHttp == null){
+        alert("Your browser does not support AJAX");
+        return;
+    }
+    xmlHttp.open("POST", "CartController");
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var url = "email=abc&btnAction=checkout&orderDetailsXML=";
+    url += createOrderDetailsXML();
+    //url += "&orderXML=" + createOrderXML();
+    
+    xmlHttp.send(url);
+    document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
+    window.location.href="checkOutSuccess.jsp";
+}
+
+function checkoutCallback(callback){
+    if(xmlHttp.status == 200){
+        var resp = xmlHttp.response;
+        if(resp == "checkout successful!"){
+            alert("Thanks you!");
+            console.log("checkOut OK!");
+            if(callback != undefined){
+                callback();
+            }
+            return true;
+        }
+    }else if (resp == "emtpy Cart or error."){
+        console.log("else if");
+        return false;
+    }else{
+        console.log("out of else if");
+    }
+
+}
+
+function ajaxFunction(req,callback) {
     //this.LoginCallBack = callback;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -560,7 +421,8 @@ var ajaxFunction = function(req,callback) {
         xmlhttp=new ActiveXObject("Msxm12.XMLHTTP");
     }
     if(xmlhttp) {
-        
+        //  var txtname = username.value;
+        // var txtpwd = document.getElementById(password);
         if(req.type =="GET"){
             var reqURL = req.servlet;
             if(req.param!=undefined){
@@ -584,5 +446,6 @@ var ajaxFunction = function(req,callback) {
 
 }
 
-
-
+function cout(){
+    window.location.href="checkOutSuccess.jsp";
+}

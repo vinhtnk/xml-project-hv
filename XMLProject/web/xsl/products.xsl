@@ -8,11 +8,13 @@
     -->
     
     <xsl:template match="/" >
+        <div class="categoryName" > Sản phẩm mới </div>
         <xsl:apply-templates select="products"/>
     </xsl:template>
 
     <xsl:template match="products">
         <xsl:for-each select="product[new_product='true']">
+            
             <div class="main-item">
 <!--                <table class="tableItem">
                     <tr>

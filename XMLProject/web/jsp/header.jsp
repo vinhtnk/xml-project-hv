@@ -106,11 +106,13 @@
             <tr>
                 <td width="45%" />
                 <td width="55%">
-                    <form>
+                    <form id="formSearch">
                         <span class="styleTextSearch">Tìm kiếm tên sản phẩm</span>
-                        <input name="txtSearch" class="textboxSearch" type ="text"/>
-                        <img ID="btnSearch" src="./Image/search.png" OnClick="jsUtils.btnSearch_Click(this.form.txtSearch.value);"
+                        <input name="txtSearchBox" class="textboxSearch" type ="text" id="txtSearch"/>
+
+                        <img ID="btnSearch" src="./Image/search.png" OnClick="btnSearch_Click();"
                              Style="vertical-align: inherit; cursor: pointer"/>
+
                     </form>
 
                 </td>
@@ -127,7 +129,7 @@
                                 <img src="Image/Pay1.png" />
                             </td>
                             <td width="40%" align="center" class="styleTextCart">
-                                <a href="#" style="font-weight: bold; text-decoration: none; color: #CCCCCC;
+                                <a href="showCart.jsp" style="font-weight: bold; text-decoration: none; color: #CCCCCC;
                                    font-size: small">
                                     <span id="totalPrice">
                                     </span>

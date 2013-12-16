@@ -31,7 +31,7 @@ public class OrderDAO {
         con = ConnectDB.getCon();
         List<OrderDTO> listorder = new ArrayList<OrderDTO>();
         try {
-            query = "Select * from order";
+            query = "Select * from orders";
             stm = con.prepareStatement(query);
             rs = stm.executeQuery();
 
@@ -39,7 +39,7 @@ public class OrderDAO {
                 OrderDTO order = new OrderDTO();
                 order.setOrderID(rs.getInt("OrderID"));
                 order.setEmail(rs.getString("Email"));
-                order.setTotalPrice(rs.getFloat("TotalPrice"));
+                order.setTotalPrice(rs.getInt("TotalPrice"));
                 order.setOrderDate(rs.getDate("OrderDate"));
                 order.setReceiveDate(rs.getDate("ReceiveDate"));
                 order.setNote(rs.getString("Note"));
@@ -49,6 +49,7 @@ public class OrderDAO {
             return listorder;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         } finally {
             try {
@@ -71,7 +72,7 @@ public class OrderDAO {
         con = ConnectDB.getCon();
         List<OrderDTO> listorder = new ArrayList<OrderDTO>();
         try {
-            query = "Select * from order where orderId = ?";
+            query = "Select * from orders where orderId = ?";
             stm = con.prepareStatement(query);
             stm.setInt(1, orderId);
             rs = stm.executeQuery();
@@ -80,7 +81,7 @@ public class OrderDAO {
                 OrderDTO order = new OrderDTO();
                 order.setOrderID(rs.getInt("OrderID"));
                 order.setEmail(rs.getString("Email"));
-                order.setTotalPrice(rs.getFloat("TotalPrice"));
+                order.setTotalPrice(rs.getInt("TotalPrice"));
                 order.setOrderDate(rs.getDate("OrderDate"));
                 order.setReceiveDate(rs.getDate("ReceiveDate"));
                 order.setNote(rs.getString("Note"));
@@ -90,6 +91,7 @@ public class OrderDAO {
             return listorder;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         } finally {
             try {
@@ -111,7 +113,7 @@ public class OrderDAO {
     public boolean addNeworder(OrderDTO order) {
         con = ConnectDB.getCon();
         try {
-            query = "insert into order (CustomerEmail,TotalPrice,OrderDate,ReceiveDate,Note,Status) "
+            query = "insert into orders (Email,TotalPrice,OrderDate,ReceiveDate,Note,Status) "
                     + "values (?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setString(1, order.getEmail());
@@ -122,29 +124,20 @@ public class OrderDAO {
             stm.setString(6, order.getStatus());
             int row = stm.executeUpdate();
             if (row > 1) {
+
                 return true;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-                if (stm != null) {
-                    stm.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
         return false;
     }
 
     public boolean updateorder(OrderDTO order) {
         con = ConnectDB.getCon();
         try {
-            query = "update order set status = ? where orderid=?";
+            query = "update orders set status = ? where orderid=?";
 
             stm = con.prepareStatement(query);
             stm.setString(1, order.getStatus());
@@ -154,6 +147,7 @@ public class OrderDAO {
                 return true;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         } finally {
             try {
@@ -173,7 +167,7 @@ public class OrderDAO {
     public boolean deleteorder(OrderDTO order) {
         con = ConnectDB.getCon();
         try {
-            query = "delete from order where orderid=?";
+            query = "delete from orders where orderid=?";
 
             stm = con.prepareStatement(query);
             stm.setInt(1, order.getOrderID());
@@ -183,6 +177,7 @@ public class OrderDAO {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         } finally {
             try {
@@ -197,5 +192,36 @@ public class OrderDAO {
             }
         }
         return false;
+    }
+
+    public int getOrderId(OrderDTO order) {
+        //con = ConnectDB.getCon();
+        int orderId = 1;
+        try {
+
+            query = "Select @@Identity";
+            stm = con.prepareStatement(query);
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+                orderId = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
+        }finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            return orderId;
+        
     }
 }

@@ -14,12 +14,12 @@ public class OrderDetailDTO {
     private String productID;
     private String productName;
     private int quantity;
-    private float price;
+    private int price;
 
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(int orderID, String productID, String productName, int quantity, float price) {
+    public OrderDetailDTO(int orderID, String productID, String productName, int quantity, int price) {
         this.orderID = orderID;
         this.productID = productID;
         this.productName = productName;
@@ -35,11 +35,11 @@ public class OrderDetailDTO {
         this.orderID = orderID;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

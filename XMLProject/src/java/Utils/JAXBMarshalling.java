@@ -5,15 +5,24 @@
 package Utils;
 
 import DAO.CategoryDAO;
+import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import DTO.CategoryDTO;
+import DTO.OrderDTO;
+import DTO.OrderDetailDTO;
 import DTO.ProductDTO;
 import generated.jaxb.Categories.Categories;
 import generated.jaxb.Categories.CategoryType;
+import generated.jaxb.OrderDetail.OrderDetailType;
+import generated.jaxb.OrderDetail.OrderDetails;
+import generated.jaxb.Orders.OrderType;
+import generated.jaxb.Orders.Orders;
 import generated.jaxb.Products.ProductType;
 import generated.jaxb.Products.Products;
 import java.io.File;
 import java.math.BigInteger;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
@@ -29,8 +38,7 @@ public class JAXBMarshalling {
         try {
             JAXBContext ctx = JAXBContext.newInstance(obj.getClass());
             Marshaller mar = ctx.createMarshaller();
-            mar.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-            mar.setProperty("com.sun.xml.bind.xmlHeaders", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            
             mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             mar.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 
@@ -87,5 +95,54 @@ public class JAXBMarshalling {
             e.printStackTrace();
         }
         
+    }
+
+    public static void marshallingOrder(String outputPath) {
+        try {
+            OrderDAO orderDAO = new OrderDAO();
+        List<OrderDTO> listOrder = new ArrayList<OrderDTO>();
+        listOrder = orderDAO.getAllOrder();
+
+        Orders orders = new Orders();
+        if (listOrder.size() > 0) {
+            for (int i = 0; i < listOrder.size(); i++) {
+                OrderType order = new OrderType();
+                order.setOrderID(BigInteger.valueOf(listOrder.get(i).getOrderID()));
+                order.setEmail(listOrder.get(i).getEmail());
+                order.setTotalPrice(listOrder.get(i).getTotalPrice());
+                
+                orders.getOrder().add(order);
+            }
+        }
+        JAXBMarshalling.marshallXML(orders, outputPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void marshallingOrderDetails(String outputPath) {
+        try {
+            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+        List<OrderDetailDTO> listOrderDetail = new ArrayList<OrderDetailDTO>();
+        listOrderDetail = orderDetailDAO.getAllOrderDetail();
+
+        OrderDetails odts = new OrderDetails();
+        if (listOrderDetail.size() > 0) {
+            for (int i = 0; i < listOrderDetail.size(); i++) {
+                OrderDetailType odt = new OrderDetailType();
+                odt.setOrderID(BigInteger.valueOf(listOrderDetail.get(i).getOrderID()));
+                odt.setProductID(listOrderDetail.get(i).getProductID());
+                odt.setProductName(listOrderDetail.get(i).getProductName());
+                odt.setQuantity(BigInteger.valueOf(listOrderDetail.get(i).getQuantity()));
+                odt.setPrice(listOrderDetail.get(i).getPrice());
+                odts.getOrderDetail().add(odt);
+            }
+        }
+        JAXBMarshalling.marshallXML(odts, outputPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

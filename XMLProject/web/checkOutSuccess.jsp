@@ -1,44 +1,20 @@
-<%-- 
-    Document   : index
-    Created on : Dec 2, 2013, 10:35:48 PM
-    Author     : Hoang
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <%@page session="true" %>
-
-<jsp:useBean class="Utils.JAXBMarshalling" id="marshallerUtils" scope="request"/>
-
-<%
-            String webpath = application.getRealPath("/");
-            marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
-            marshallerUtils.marshallingProduct(webpath + "xml/products.xml");
-%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <link href="css/style.css" rel="stylesheet"/>
 
-<!--<script type="text/javascript" src="js/callAjax.js"></script>-->
+
 <script type="text/javascript" src="js/jsUtils.js"></script>
-<!--<script type="text/javascript" src="js/pageTransfer.js"></script>-->
-<!--<script type="text/javascript" src="js/validateUtils.js"></script>-->
+
 
 <script type="text/javascript" language="text/javascript">
-      
-    
-        
-    
+    sessionStorage.cart = null;
+    sessionStorage.totalPrice = null;
 
-
-    var logout = function(){
-        sessionStorage.removeItem("EMAIL");
-        sessionStorage.removeItem("USERNAME");
-    };
 </script>
 
 <html>
@@ -60,10 +36,14 @@
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
-                        <div id="listItem">                            
-                            <jsp:include page="jsp/listProduct.jsp" flush="true"/>
+                        <div align="center">
+                            <h3>Đặt hàng thành công</h3>
+                            <br/> <a href="index.jsp">Quay lại trang chủ</a>
                         </div>
+                        <br/>
+                        
                     </td>
+
                 </tr>
 
             </table>
