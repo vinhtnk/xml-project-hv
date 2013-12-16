@@ -30,7 +30,7 @@ public class UserDAO {
         con = ConnectDB.getCon();
 
         try {
-            query = "Select * from user where email=? and password=?";
+            query = "Select * from Users where Email=? and Password=?";
             stm = con.prepareStatement(query);
             stm.setString(1, email);
             stm.setString(2, pwd);
@@ -62,7 +62,7 @@ public class UserDAO {
         con = ConnectDB.getCon();
         List<UserDTO> listUser = new ArrayList<UserDTO>();
         try {
-            query = "Select * from user";
+            query = "Select * from users";
             stm = con.prepareStatement(query);
             rs = stm.executeQuery();
              
@@ -104,7 +104,7 @@ public class UserDAO {
         con = ConnectDB.getCon();
         List<UserDTO> listUser = new ArrayList<UserDTO>();
         try {
-            query = "Select * from user where userName like ? and role='customer'";
+            query = "Select * from users where userName like ? and role='customer'";
             stm = con.prepareStatement(query);
             stm.setString(1, "%" + key + "%");
             rs = stm.executeQuery();
@@ -145,7 +145,7 @@ public class UserDAO {
     public boolean addNewUser(UserDTO user) {
         con = ConnectDB.getCon();
         try {
-            query = "insert into user (userName,Gender,Phone,Address,userEmail,Password, "
+            query = "insert into users (userName,Gender,Phone,Address,userEmail,Password, "
                     + "Role)values (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setString(1, user.getUserName());
@@ -181,7 +181,7 @@ public class UserDAO {
     public boolean updateuser(UserDTO user) {
         con = ConnectDB.getCon();
         try {
-            query = "update user set userName = ?, Gender =?,Phone=?,Address=?,"
+            query = "update users set userName = ?, Gender =?,Phone=?,Address=?,"
                     + "userEmail=?,Password=? where userid=?";
 
             stm = con.prepareStatement(query);
@@ -217,7 +217,7 @@ public class UserDAO {
     public boolean deleteuser(UserDTO user) {
         con = ConnectDB.getCon();
         try {
-            query = "delete from user where userid=?";
+            query = "delete from users where userid=?";
 
             stm = con.prepareStatement(query);
             stm.setInt(1, user.getUserID());
@@ -247,10 +247,10 @@ public class UserDAO {
         con = ConnectDB.getCon();
         
         try {
-            query = "Select * from user where email=?";
+            query = "Select * from Users where Email=?";
             stm = con.prepareStatement(query);
             stm.setString(1, email);
-            rs = stm.executeQuery(query);
+            rs = stm.executeQuery();
             UserDTO user = new UserDTO();
             while (rs.next()) {
 
@@ -291,7 +291,7 @@ public class UserDAO {
         }
 
         try {
-            query = "Select * From user Where username = '?' AND email ='?'";
+            query = "Select * From Users Where Username = '?' AND Email ='?'";
             stm = con.prepareStatement(query);
             stm.setString(1, user.getUserName());
             stm.setString(2, user.getEmail());
