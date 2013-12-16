@@ -51,7 +51,7 @@
     }
 </style>
 <div id="navBar">
-    <form class="pure-form" method="GET">
+    <form class="pure-form" action="UserController" method="GET">
         <table class="style1">
             <tr>
                 <td width="30%" rowspan="2" align="center">
@@ -67,14 +67,13 @@
                         <div id="navBarGuess">
                             <div id="loginForm">
                                 <form class="pure-form"  method="POST">
-
                                     Email <input id="email" type="text" name="txtEmail" class="style2"/><br/><br/>
                                     Password <input id="password" type="password" name="txtPassword" class="style2"/><br/><br/>
-                                    <button type="submit" onclick="callAjax.login(email,password,function(){location.reload(false);});return false;" class="pure-button notice">Đăng nhập</button>
+                                    <button type="submit" name="action" value="Login" class="pure-button notice">Đăng nhập</button>
                                     <div id="loginStatus" class="onHide"></div>
                                     <button type="submit">Đăng ký</button>
                                 </form
-
+                                <%-- onclick="callAjax.login(email,password,function(){location.reload(false);});return false;" --%>
                             </div>
 
                         </div>
