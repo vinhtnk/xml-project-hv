@@ -33,9 +33,9 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-           String btnAction = request.getParameter("btnAction");
-            if (null != btnAction) {
-                if (btnAction.equalsIgnoreCase("Login")) {
+           String action = request.getParameter("action");
+            if (null != action) {
+                if (action.equalsIgnoreCase("login")) {
 
                     String email = request.getParameter("txtEmail");
                     String password = request.getParameter("txtPassword");
@@ -67,17 +67,16 @@ public class UserController extends HttpServlet {
                         response.setCharacterEncoding("UTF-8");
                         if (role.equals("User")) {
                             out.write("Login successful!");
-                        } else if (role.equals("Admin")) {
+                        } else if (role.equals("admin")) {
                             out.write("Login Admin successful!");
                         }
 
                     } else {
-
                         out.write("Email or password invalid. please try again");
                     }
-                } else if (btnAction.equalsIgnoreCase("Register")) {
+                } else if (action.equalsIgnoreCase("Register")) {
                    createNewUser(request);
-                } else if (btnAction.equalsIgnoreCase("Logout")) {
+                } else if (action.equalsIgnoreCase("Logout")) {
                     HttpSession session = request.getSession();
                     session.invalidate();
 
