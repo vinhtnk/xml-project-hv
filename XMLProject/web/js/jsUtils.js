@@ -5,7 +5,7 @@ var jsUtils = function(){
 
 
 
-jsUtils.sessionUser = function(uinfo){
+function sessionUser(uinfo){
     if(uinfo){
         
         this.uinfo = uinfo;
@@ -15,48 +15,57 @@ jsUtils.sessionUser = function(uinfo){
     }
 }
 
-jsUtils.currentPageId = function(){
-    if(sessionStorage.getItem("currentPage") == null){
-        jsUtils.setDefaultPageId();
-    }
-    return sessionStorage.getItem("currentPage");
-}
-
-jsUtils.id= function(id){
+function id(id){
     return document.getElementById(id);
 }
 
 
 
-jsUtils.previousPageId = function(){
-    return sessionStorage.getItem("previousPage");
-}
-jsUtils.showHidePage = function(thisPage){
+
+function showHidePage(thisPage){
     // var page = Pageid;
     var ele = document.getElementById(thisPage);
-    if(this.hasClass(ele, "onHide")){
-        jsUtils.removeClass(ele, "onHide" );
+    if(hasClass(ele, "onHide")){
+        removeClass(ele, "onHide" );
     }else{
-        jsUtils.addClass(ele, "onHide" );
+        addClass(ele, "onHide" );
     }
 
-};
+}
 
 
-jsUtils.hasClass = function(ele, className){
+function loginReg(className){
+    var login = "loginForm";
+    var reg = "regForm";
+    if(className == reg){
+        var ShouldHide = login;
+    }
+    else if(className == login){
+        var ShouldHide = reg;
+    }
+    var elem = document.getElementById(ShouldHide);
+    showHidePage(className);
+    if(!hasClass(elem, "onHide")){
+        showHidePage(ShouldHide);
+    }
+
+}
+
+
+function hasClass(ele, className){
     return new RegExp(' ' + className + ' ').test(' ' + ele.className + ' ');
 }
 
-jsUtils.addClass = function(ele, className){
-    if (!this.hasClass(ele, className)) {
-        ele.className += ' ' + className;
+function addClass(ele, className){
+    if (!hasClass(ele, className)) {
+        ele.className += '' + className;
     }
 }
 
 // removeClass
-jsUtils.removeClass = function(ele, className){
+function removeClass(ele, className){
     var newClass = ' ' + ele.className.replace( /[\t\r\n]/g, ' ') + ' ';
-    if (this.hasClass(ele, className)) {
+    if (hasClass(ele, className)) {
         while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
             newClass = newClass.replace(' ' + className + ' ', ' ');
         }
@@ -66,61 +75,45 @@ jsUtils.removeClass = function(ele, className){
 }
 
 
-jsUtils.removeClassOfChild = function(idFather, className){
+function removeClassOfChild(idFather, className){
     var father = document.getElementById(idFather);
     var childLength = father.children.length;
     for(var i=0;i<childLength;i++){
         var removeFromChild = father.children[i];
-        jsUtils.removeClass(removeFromChild,className) ;
+        removeClass(removeFromChild,className) ;
     }
 }
 
-jsUtils.addClassOfChild = function(isFather,className){
+function addClassOfChild(isFather,className){
     var father  = document.getElementById(isFather);
     var childLength  = father.children.length;
     for(var i=0;i<childLength;i++){
         var addToChild = father.children[i];
-        jsUtils.addClass(addToChild,className) ;
+        addClass(addToChild,className) ;
     }
 }
 
 
-jsUtils.checkType = function(isSession){
+function checkType(isSession){
+
     var classAdd = "onHide";
+    //var user = document.getElementById("navBarUser");
+    //var guess = document.getElementById("navBarGuess");
     if(isSession != "" && isSession != undefined){
 
         var login = document.getElementById("Uitem0");
-        login.innerText = "Hi "+ isSession;
-        login.textContent = "Hi " + isSession;
-
-        jsUtils.removeClassOfChild("navBarUser",classAdd);
-        jsUtils.addClassOfChild("navBarGuess", classAdd);
+        login.innerText = "Chào "+ isSession + ",";
+        //login.textContent = "Hi " + isSession;
+       
+        removeClassOfChild("navBarUser",classAdd);
+        addClassOfChild("navBarGuess", classAdd);
 
     }else{
-        jsUtils.addClassOfChild("navBarUser",classAdd);
-        jsUtils.removeClassOfChild("navBarGuess", classAdd);
+        removeClassOfChild("navBarGuess",classAdd);
+        addClassOfChild("navBarUser", classAdd);
     }
 }
    
-
-
-
-jsUtils.removeFromCart = function(itemNoId){
-    var noId = itemNoId.split("-").pop();
-    var moneyTotal = document.getElementById("moneyTotal");
-    document.getElementById("NumberOfItem-"+noId).value = "0";
-    jsUtils.addToCart(itemNoId,true);
-    if(parseInt(moneyTotal.innerText,10) == 0){
-        jsUtils.addClass(document.getElementById('cartTotal'), "onHide");
-        document.getElementById("yourCart").className = "emptyCart";
-    }
-    var removeItem = document.getElementById("cart-"+itemNoId);
-    return removeItem.parentNode.removeChild(removeItem);
-    
-}
-
-
-
 function start(){
     if(typeof(sessionStorage) != "undefined"){
         if(sessionStorage.cart == null){
@@ -224,18 +217,13 @@ function showCart(items, tableID){
     }
 }
 
-function removeCartItem(id){
-    //window.event.preventDefault ? window.event.preventDefault() : window.event.returnValue = false;
-    
+function removeCartItem(id){    
     var cart = eval(sessionStorage.cart);
     var ttp = eval(sessionStorage.totalPrice);
     for(var i = 0; i < cart.length; i++){
-        if(cart[i].id == id){
-            //totalPrice = 0;
-            //totalQuantity = 0;
+        if(cart[i].id == id){            
             cart.splice(i, 1);
-            sessionStorage.cart = JSON.stringify(cart);
-            
+            sessionStorage.cart = JSON.stringify(cart);            
         }
     }
     
@@ -286,15 +274,6 @@ Number.prototype.formatMoney = function(c, d, t){
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-jsUtils.showPopUp = function(itemNoId){
-    // var selectId = document.getElementById(itemNoId);
-    var copyData = document.getElementById(itemNoId).parentNode.innerHTML;
-    document.getElementById("popUp").children[1].innerHTML = copyData;
-    jsUtils.removeClass(document.getElementById('popUp'),"onHide");
-    jsUtils.removeClass(jsUtils.id('popUp'),"onHide");
-    var Desc = jsUtils.id('popUp').children[1].children[0].children[1].children[2];
-    jsUtils.removeClass(Desc, "onHide");
-}
 
 
 function btnSearch_Click(){
@@ -373,41 +352,22 @@ function createOrderDetailsXML(){
     return orderDetailsXMLDOM;
 }
 
-function checkout(callback){
-    xmlHttp = getXmlHttpObject();
-    if(xmlHttp == null){
-        alert("Your browser does not support AJAX");
-        return;
+function checkout(email, callback){
+    if(email==''||email==null){
+        id("loginStatus").innerText ="* Vui lòng đăng nhập trước khi đặt hàng";
+        removeClass(id("loginStatus"), "onHide");
+        loginReg("loginForm");
+    } else{
+        addClass(id("loginStatus"), "onHide");
+        var req = {};
+        req.type = "POST";
+        req.param = "email=" + email + "&btnAction=checkout&orderDetailsXML=" + createOrderDetailsXML();
+        req.servlet = "CartController";
+        var checkoutCallback = function(){
+            callAjax.checkoutCallback(callback)
+        };
+        ajaxFunction(req,checkoutCallback);
     }
-    xmlHttp.open("POST", "CartController");
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var url = "email=abc&btnAction=checkout&orderDetailsXML=";
-    url += createOrderDetailsXML();
-    //url += "&orderXML=" + createOrderXML();
-    
-    xmlHttp.send(url);
-    document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
-    window.location.href="checkOutSuccess.jsp";
-}
-
-function checkoutCallback(callback){
-    if(xmlHttp.status == 200){
-        var resp = xmlHttp.response;
-        if(resp == "checkout successful!"){
-            alert("Thanks you!");
-            console.log("checkOut OK!");
-            if(callback != undefined){
-                callback();
-            }
-            return true;
-        }
-    }else if (resp == "emtpy Cart or error."){
-        console.log("else if");
-        return false;
-    }else{
-        console.log("out of else if");
-    }
-
 }
 
 function ajaxFunction(req,callback) {
@@ -446,6 +406,83 @@ function ajaxFunction(req,callback) {
 
 }
 
-function cout(){
-    window.location.href="checkOutSuccess.jsp";
+
+function login(email,password,callback){
+    if(email!=null && password !=null){
+        var req = {};
+        req.type = "POST";
+        req.param = "txtEmail=" + email.value+"&txtPassword=" +password.value+"&btnAction=Login";
+        req.servlet = "UserController";
+        var loginCallback = function(){
+            callAjax.loginCallback(callback)
+        };
+        ajaxFunction(req,loginCallback);
+    }
+}
+
+function regAcc(username,gender,address,phone,email,password,callback){
+    if(checkRegAcc(username.value, address.value, phone.value, email.value, password.value)){
+        var req = {};
+        req.type = "POST";
+        req.param = "txtUsername=" + username.value + "&txtGender=" + gender.value + "&txtAddress=" 
+        + address.value + "&txtPhone=" + phone.value + "&txtEmail=" + email.value
+        + "&txtPassword=" + password.value +"&btnAction=Register";
+        req.servlet = "UserController";
+        var regCallback = function(){
+            callAjax.regCallback(email, password);
+        };
+        ajaxFunction(req,regCallback);
+    };
+}
+
+function checkRegAcc(username,address,phone,email,password){
+    var errors = [];
+    var RE_EMAIL = /^(\w+[\-\.])*\w+@(\w+\.)+[A-Za-z]+$/;
+    if (trim(username) == "") {
+        errors[errors.length] = "Bạn chưa nhập họ tên";
+    }
+
+    if (trim(address) == "") {
+        errors[errors.length] = "Bạn chưa nhập địa chỉ";
+    }
+
+    if (trim(phone) == "") {
+        errors[errors.length] = "Bạn chưa nhập số điện thoại";
+    }
+
+    if (trim(email) == "") {
+        errors[errors.length] = "Bạn chưa nhập email";
+    }
+
+    if (!RE_EMAIL.test(email)) {
+        errors[errors.length] = "Bạn nhập email không đúng mẫu";
+    }
+
+    if (trim(password) == "") {
+        errors[errors.length] = "Bạn chưa nhập mật khẩu";
+    }
+
+    if (errors.length > 0) {
+        var msg = "Xin vui lòng điền đầy đủ thông tin bắt buộc: ";
+        for (var i = 0; i < errors.length; i++) {
+            var numErr = i + 1;
+            msg += "\n" + numErr + ". " + errors[i];
+        }
+        id("regStatus").innerText ="* "+ msg;
+        removeClass(id("regStatus"), "onHide");
+        
+        return false;
+    }
+    addClass(id("regStatus"), "onHide");
+    return true;
+}
+
+function trim(str) {
+    var start = 0;
+    var end = str.length;
+    while (start < str.length && str.charAt(start) == " ")
+        start++;
+    while (end > 0 && str.charAt(end - 1) == " ")
+        end--;
+    return str.substr(start, end - start);
 }

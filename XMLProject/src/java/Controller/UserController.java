@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import DAO.UserDAO;
 import DTO.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @author Hoang
  */
 public class UserController extends HttpServlet {
-   
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -29,45 +29,47 @@ public class UserController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-           String action = request.getParameter("action");
+            String action = request.getParameter("btnAction");
             if (null != action) {
                 if (action.equalsIgnoreCase("login")) {
 
-                    String email = request.getParameter("txtEmail");
+                    String txtemail = request.getParameter("txtEmail");
                     String password = request.getParameter("txtPassword");
-                    if (email == null || password == null) {
+                    if (txtemail == null || password == null) {
                         return;
                     } else {
-                        email = email.trim();
+                        txtemail = txtemail.trim();
                         password = password.trim();
                     }
-                    String username = "";
-                    String role = ""; 
+                    String email = "";
+                    String uname = "";
+                    String role = "";
                     int userId = 0;
                     boolean isUser = false;
 
-                    
+
                     UserDAO userDao = new UserDAO();
-                    isUser = userDao.checkLogin(email, password);
-                    if (isUser) {                        
-                        UserDTO user = userDao.getUserInfo(email);
-                        username = user.getUserName();
+                    isUser = userDao.checkLogin(txtemail, password);
+                    if (isUser) {
+                        UserDTO user = userDao.getUserInfo(txtemail);
+                        email = user.getEmail();
+                        uname = user.getUserName();
                         role = user.getRole().toString();
                         userId = user.getUserID();
                         HttpSession session = request.getSession(true);
-                        session.setAttribute("USERNAME", username);
-                        session.setAttribute("USER", username);
+                        session.setAttribute("EMAIL", email);
+                        session.setAttribute("USER", uname);
                         session.setAttribute("ROLE", role);
                         session.setAttribute("UID", userId);
                         response.setContentType("text/plain");
                         response.setCharacterEncoding("UTF-8");
-                        if (role.equals("User")) {
+                        if (role.equalsIgnoreCase("Customer")) {
                             out.write("Login successful!");
-                        } else if (role.equals("admin")) {
+                        } else if (role.equalsIgnoreCase("admin")) {
                             out.write("Login Admin successful!");
                         }
 
@@ -75,7 +77,8 @@ public class UserController extends HttpServlet {
                         out.write("Email or password invalid. please try again");
                     }
                 } else if (action.equalsIgnoreCase("Register")) {
-                   createNewUser(request);
+                    String cNU = createNewUser(request);
+                    out.write(cNU);
                 } else if (action.equalsIgnoreCase("Logout")) {
                     HttpSession session = request.getSession();
                     session.invalidate();
@@ -87,7 +90,7 @@ public class UserController extends HttpServlet {
         } finally {
             out.close();
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -99,9 +102,9 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -112,7 +115,7 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -125,28 +128,40 @@ public class UserController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void createNewUser(HttpServletRequest request) {
+    private String createNewUser(HttpServletRequest request) throws UnsupportedEncodingException {
         synchronized (this) {
-            String txtUsername = request.getParameter("txtUserName");
-            String txtPassword = request.getParameter("txtPassword");
-            String txtEmail = request.getParameter("txtEmail");
-            String txtFirstName = request.getParameter("txtFirstName");
-            String txtMiddleName = request.getParameter("txtMiddleName");
-            String txtLastName = request.getParameter("txtLastName");
+            request.setCharacterEncoding("UTF-8");
+            String txtUsername = new String(request.getParameter("txtUsername").getBytes("iso-8859-1"), "UTF-8");
+            String txtGender = new String(request.getParameter("txtGender").getBytes("iso-8859-1"), "UTF-8");
+            String txtAddress = new String(request.getParameter("txtAddress").getBytes("iso-8859-1"), "UTF-8");
             String txtPhone = request.getParameter("txtPhone");
+            String txtEmail = request.getParameter("txtEmail");
+            String txtPassword = request.getParameter("txtPassword");
             // insert database
             UserDTO user = new UserDTO();
             user.setUserName(txtUsername);
+            user.setGender(txtGender);
             user.setPwd(txtPassword);
             user.setEmail(txtEmail);
-            //user.setFullName(txtFirstName + txtMiddleName + txtLastName);
+            user.setAddress(txtAddress);
             user.setPhone(txtPhone);
+            user.setRole("Customer");
             UserDAO userDao = new UserDAO();
             if (!userDao.isExistedUser(user)) {
-                userDao.addNewUser(user);
+                if (userDao.addNewUser(user)) {
+//                    HttpSession session = request.getSession(true);
+//                    session.setAttribute("EMAIL", txtEmail);
+//                    session.setAttribute("USER", txtUsername);
+//                    session.setAttribute("ROLE", "Customer");
+//                    response.setContentType("text/plain");
+//                    response.setCharacterEncoding("UTF-8");
+                    return "Register successful!";
+                } else {
+                    return "Error";
+                }
             } else {
+                return "Email existed!";
             }
         }
     }
-
 }

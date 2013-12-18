@@ -23,17 +23,36 @@
 
 <link href="css/style.css" rel="stylesheet"/>
 
-<!--<script type="text/javascript" src="js/callAjax.js"></script>-->
+<script type="text/javascript" src="js/callAjax.js"></script>
 <script type="text/javascript" src="js/jsUtils.js"></script>
-<!--<script type="text/javascript" src="js/pageTransfer.js"></script>-->
+<script type="text/javascript" src="js/pageTransfer.js"></script>
 <!--<script type="text/javascript" src="js/validateUtils.js"></script>-->
 
 <script type="text/javascript" language="text/javascript">
-      
     
-        
-    
+    function start(){
 
+        var info = {};
+        info.ssEmail = "${EMAIL}";
+        info.ssUsername = "${USER}";
+
+        sessionUser(info);
+        if(info.ssEmail!="" || info.ssEmail!=null){
+            checkType(info.ssEmail);
+        }
+    
+        if(typeof(sessionStorage) != "undefined"){
+            if(sessionStorage.cart == null){
+                document.getElementById('totalPrice').innerHTML = 0;
+            }else{
+                document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
+            }
+        } else{
+            alert("Your browser is not support storage.");
+
+        }
+    }
+    
 
     var logout = function(){
         sessionStorage.removeItem("EMAIL");
@@ -48,6 +67,8 @@
     </head>
     <body onload="start()">
         <div id="header">
+            <jsp:include page="jsp/login.jsp" flush="true"/>
+            <jsp:include page="jsp/regAccount.jsp" flush="true"/>
             <jsp:include page="jsp/header.jsp"/>
         </div>
         <div>

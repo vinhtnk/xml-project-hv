@@ -15,9 +15,38 @@
 
 <script type="text/javascript" src="js/callAjax.js"></script>
 <script type="text/javascript" src="js/jsUtils.js"></script>
-<script type="text/javascript" src="js/pageTransfer.js"></script>
-<script type="text/javascript" src="js/validateUtils.js"></script>
 
+<script type="text/javascript" language="text/javascript">
+
+    function start(){
+
+    var info = {};
+        info.ssEmail = "${EMAIL}";
+        info.ssUsername = "${USER}";
+        info.UID = "${UID}";
+
+        sessionUser(info);
+        if(info.ssEmail!="" || info.ssEmail!=null){
+            checkType(info.ssEmail);
+        }
+    if(typeof(sessionStorage) != "undefined"){
+        if(sessionStorage.cart == null){
+            document.getElementById('totalPrice').innerHTML = 0;
+        }else{
+            document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
+        }
+    } else{
+        alert("Your browser is not support storage.");
+
+    }
+}
+
+
+    var logout = function(){
+        sessionStorage.removeItem("EMAIL");
+        sessionStorage.removeItem("USERNAME");
+    };
+</script>
 
 <html>
     <head>
@@ -26,6 +55,8 @@
     </head>
     <body onload="start()">
         <div id="header">
+            <jsp:include page="jsp/login.jsp" flush="true"/>
+            <jsp:include page="jsp/regAccount.jsp" flush="true"/>
             <jsp:include page="jsp/header.jsp"/>
         </div>
         <div>
@@ -114,14 +145,6 @@
                                     </c:if>
                                 </c:when>
 
-
-                                <c:when test="${Condition =='Search'}">
-                                    <script type="tetext/javascript">
-                                        alert(<c:out value="${Val}"/>);
-                                    </script>
-                                    <x:set var="xPathCon" 
-                                           select="$doc//products/product[contains(  translate(productName, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz'), translate($Val, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz'))]"/>
-                                </c:when>
 
                             </c:choose>
                         </div>

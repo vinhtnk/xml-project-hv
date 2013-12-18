@@ -12,12 +12,13 @@
 <script type="text/javascript" src="js/callAjax.js"></script>
 
 <script type="text/javascript" language="text/javascript">
+    
+    function start(){
 
-    function start(tableID){
         var info = {};
         info.ssEmail = "${EMAIL}";
         info.ssUsername = "${USER}";
-        info.UID = "${UID}";
+        
 
         sessionUser(info);
         if(info.ssEmail!="" || info.ssEmail!=null){
@@ -25,23 +26,14 @@
         }
         if(typeof(sessionStorage) != "undefined"){
             if(sessionStorage.cart == null){
-                document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
-                document.getElementById('totalPrice').innerHTML = 0;                
+                document.getElementById('totalPrice').innerHTML = 0;
             }else{
                 document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
             }
         } else{
-            alert("browser is not support storage!!!");
+            alert("Your browser is not support storage.");
 
         }
-        var items = eval(sessionStorage.cart);
-        showCart(items, tableID);
-        if(items.length == 0){
-            document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
-            document.getElementById('itemCart').deleteRow(1);
-        }
-        
-        
     }
 
 
@@ -49,6 +41,7 @@
         sessionStorage.removeItem("EMAIL");
         sessionStorage.removeItem("USERNAME");
     };
+
 </script>
 
 <html>
@@ -56,7 +49,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>H2 Store</title>
     </head>
-    <body onload="start('itemCart')">
+    <body onload="start()">
         <div id="header">
             <jsp:include page="jsp/login.jsp" flush="true"/>
             <jsp:include page="jsp/regAccount.jsp" flush="true"/>
@@ -72,38 +65,13 @@
                         </div>
                     </td>
                     <td valign="top" class="borderMainMenu">
-                        <div class="categoryName" > Giỏ hàng của bạn
-                        </div><br/>
-                        <table id="itemCart" border="1" align="center">
-                            <tr bgcolor="#9acd32" align="center" style="font-weight: bold">
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Mã sản phẩm
-                                </th>
-                                <th>
-                                    Tên sản phẩm
-                                </th>
-                                <th>
-                                    Số lượng
-                                </th>
-                                <th>
-                                    Đơn giá
-                                </th>
-                                <th>
-                                    Tổng cộng
-                                </th>
-                                <th>
-                                    Xóa sản phẩm
-                                </th>
-                            </tr>
-
-                        </table>
-                        <br/>
                         <div align="center">
-                            <input type="submit" id="btnCheckOut" value="Đặt hàng" name="btnCheckOut" onclick="checkout('${EMAIL}');"/>
+                            <h3>Đăng ký thành công. Chào mừng <span style="font-weight: bold">${USER}</span> đến với H2Store</h3>
+                            
+                            <br/> <a href="index.jsp" style="color: #3366FF; font-weight: bold">Quay lại trang chủ</a>
                         </div>
+                        <br/>
+
                     </td>
 
                 </tr>
