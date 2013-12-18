@@ -23,8 +23,7 @@
 <script type="text/javascript" src="js/adUtil.js"></script>
 <script type="text/javascript" src="js/callAjax.js"></script>
 <script type="text/javascript" src="js/jsUtils.js"></script>
-<script type="text/javascript" src="js/pageTransfer.js"></script>
-<script type="text/javascript" src="js/validateUtils.js"></script>
+
 
 <script type="text/javascript" language="text/javascript">
 
