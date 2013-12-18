@@ -107,9 +107,13 @@ callAjax.deleteProductCallBack = function(callback){
 
             if(respContent == "delete success"){
                 //
-                window.location.href("admin_page.jsp");
-                location.reload(true);
-                return false;
+                window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //location.reload();
+               // alert("ok");
+                //return false;
             }
             else{
                 //alert("delete fail");

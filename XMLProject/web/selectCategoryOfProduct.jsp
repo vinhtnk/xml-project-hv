@@ -12,7 +12,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <link href="css/style.css" rel="stylesheet"/>
-
+<c:set var="Condition" value="${param.Condition}" scope="page" />
+<c:set var="Val" value="${param.Val}" scope="page" />
 <script type="text/javascript" src="js/callAjax.js"></script>
 <script type="text/javascript" src="js/jsUtils.js"></script>
 
@@ -20,7 +21,7 @@
 
     function start(){
 
-    var info = {};
+        var info = {};
         info.ssEmail = "${EMAIL}";
         info.ssUsername = "${USER}";
         info.UID = "${UID}";
@@ -29,17 +30,17 @@
         if(info.ssEmail!="" || info.ssEmail!=null){
             checkType(info.ssEmail);
         }
-    if(typeof(sessionStorage) != "undefined"){
-        if(sessionStorage.cart == null){
-            document.getElementById('totalPrice').innerHTML = 0;
-        }else{
-            document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
-        }
-    } else{
-        alert("Your browser is not support storage.");
+        if(typeof(sessionStorage) != "undefined"){
+            if(sessionStorage.cart == null){
+                document.getElementById('totalPrice').innerHTML = 0;
+            }else{
+                document.getElementById('totalPrice').innerHTML = Number(sessionStorage.totalPrice).formatMoney(0);
+            }
+        } else{
+            alert("Your browser is not support storage.");
 
+        }
     }
-}
 
 
     var logout = function(){
@@ -70,8 +71,7 @@
                     </td>
                     <td valign="top" class="borderMainMenu">
                         <div id="listItem">
-                            <c:set var="Condition" value="${param.Condition}" scope="page" />
-                            <c:set var="Val" value="${param.Val}" scope="page" />
+
 
                             <c:import var="selectProductXML" url="/xml/products.xml"  charEncoding="UTF-8"/>
                             <c:import var="categoryXML" url="/xml/categories.xml"  charEncoding="UTF-8"/>
@@ -87,7 +87,7 @@
                                         </x:forEach>
                                         <x:forEach var="root" select="$doc/products/product[categoryID=$Val]">
                                             <div class="main-item">
-                                            
+
                                                 <ol>
                                                     <li>
                                                         <table class="tableItem">

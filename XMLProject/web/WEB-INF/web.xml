@@ -21,6 +21,10 @@
         <servlet-class>Controller.CartController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>Controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PDFController</servlet-name>
         <servlet-class>Controller.PDFController</servlet-class>
     </servlet>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>PDFController</servlet-name>
         <url-pattern>/PDFController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
