@@ -20,6 +20,10 @@
         <servlet-name>CartController</servlet-name>
         <servlet-class>Controller.CartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PDFController</servlet-name>
+        <servlet-class>Controller.PDFController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AppWebService</servlet-name>
         <url-pattern>/AppWebService</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/CartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PDFController</servlet-name>
+        <url-pattern>/PDFController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

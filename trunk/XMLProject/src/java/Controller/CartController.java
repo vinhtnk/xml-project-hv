@@ -28,7 +28,6 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -70,11 +69,11 @@ public class CartController extends HttpServlet {
                 TransformerFactory tff = TransformerFactory.newInstance();
                 Transformer trans = tff.newTransformer();
                 trans.setOutputProperty(OutputKeys.INDENT, "YES");
-
-               // Source src1 = new DOMSource(doc1);
+                trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                // Source src1 = new DOMSource(doc1);
                 Source src2 = new DOMSource(doc2);
                 String path = getServletContext().getRealPath("/");
-                
+
                 //Result result1 = new StreamResult(path + "xml/orders.xml");
                 Result result2 = new StreamResult(path + "xml/orderDetails.xml");
                 //trans.transform(src1, result1);
@@ -102,8 +101,10 @@ public class CartController extends HttpServlet {
                     int orderId = orderDao.getOrderId(order);
                     OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
                     orderDetailDAO.addProducttoOrder(listOrderdetail, orderId);
-                }
-//                response.sendRedirect("./checkOutSuccess.jsp");
+                }              
+                
+                out.print("checkout successful!");
+                
             }
 
         } catch (TransformerException ex) {
@@ -113,7 +114,11 @@ public class CartController extends HttpServlet {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } finally {
+            out.close();
+        }
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -151,4 +156,6 @@ public class CartController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 }

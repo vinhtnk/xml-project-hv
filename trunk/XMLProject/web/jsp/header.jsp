@@ -60,27 +60,59 @@
                 </td>
                 <td align="center" width="40%">
 
-                    <img alt="" class="style28" src="./Image/banner.png" />
+                    <img alt="" class="style28" src="./Image/banner.png" name="slide" />
+                    <script type="text/javascript">
+                        var image1 = new Image();
+                        image1.src = "./Image/banner.png";
+                        var image2 = new Image();
+                        image2.src = "./Image/Gioithieu.jpg";
+                        var image3 = new Image();
+                        image3.src = "./Image/ssip.jpg";
+                        var image4 = new Image();
+                        image4.src = "./Image/nokia.jpg";
+                        var image5 = new Image();
+                        image5.src = "./Image/lumia1520.jpg";
+                        var image6 = new Image();
+                        image6.src = "./Image/one.jpg";
+                        var image7 = new Image();
+                        image7.src = "./Image/htc.jpg";
+                        var image8 = new Image();
+                        image8.src = "./Image/slide2.jpg";
+
+                        var step=1;
+                        function slideit(){
+                            document.images.slide.src = eval("image"+step+".src");
+                            
+                            if (step<8) step++;
+                            else step=1;
+                            setTimeout("slideit()", 3000);
+                        }
+                        slideit();
+                    </script>
                 </td>
-                <td align="right" width="25%">
+                <td align="right" width="25%" style="padding-bottom: 100px;">
                     <ul id="top-ul">
                         <div id="navBarGuess">
-                            <div id="loginForm">
-                                <form class="pure-form"  method="POST">
-                                    Email <input id="email" type="text" name="txtEmail" class="style2"/><br/><br/>
-                                    Password <input id="password" type="password" name="txtPassword" class="style2"/><br/><br/>
-                                    <button type="submit" name="action" value="Login" class="pure-button notice">Đăng nhập</button>
-                                    <div id="loginStatus" class="onHide"></div>
-                                    <button type="submit">Đăng ký</button>
-                                </form
-                                <%-- onclick="callAjax.login(email,password,function(){location.reload(false);});return false;" --%>
-                            </div>
+                            <!--                            <div id="loginForm">-->
+                            <!--                                <form class="pure-form"  method="POST">
+                                                                Email <input id="email" type="text" name="txtEmail" class="style2"/><br/><br/>
+                                                                Password <input id="password" type="password" name="txtPassword" class="style2"/><br/><br/>
+                                                                <button type="submit" name="action" value="Login" class="pure-button notice">Đăng nhập</button>
+                                                                <div id="loginStatus" class="onHide"></div>
+                                                                <button type="submit">Đăng ký</button>
+                                                            </form>-->
 
+                            <img id="Gitem0" src="./Image/login.png" onclick="loginReg('loginForm')" />
+                            <img id="Gitem1" src="./Image/reg.png" onclick="loginReg('regForm')" />
+
+                            <%-- onclick="callAjax.login(email,password,function(){location.reload(false);});return false;" --%>
                         </div>
-                        <div id="navBarUser">
-                            <li class="onHide" ><a id="Uitem0" href="#">${USERNAME}</a></li>
 
-                            <li class="onHide"><a type="submit" id="Uitem2"  href="#" onclick="callAjax.logOut();return false;" >Logout</a></li>
+
+                        <div id="navBarUser">
+                            <span id="Uitem0" class="onHide">${EMAIL}</span>
+
+                            <a class="onHide" id="Uitem2"  href="#" onclick="callAjax.logOut();return false;" > Thoát</a>
                         </div>
                     </ul>
                 </td>
@@ -110,7 +142,7 @@
                         <input name="txtSearchBox" class="textboxSearch" type ="text" id="txtSearch"/>
 
                         <img ID="btnSearch" src="./Image/search.png" OnClick="btnSearch_Click();"
-                             Style="vertical-align: inherit; cursor: pointer"/>
+                             Style="vertical-align: bottom; cursor: pointer"/>
 
                     </form>
 
@@ -134,7 +166,7 @@
                                     </span>
                                 </a>
                             </td>
-                            
+
                         </tr>
                     </table>
                 </td>

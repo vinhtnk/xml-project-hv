@@ -145,7 +145,7 @@ public class UserDAO {
     public boolean addNewUser(UserDTO user) {
         con = ConnectDB.getCon();
         try {
-            query = "insert into users (userName,Gender,Phone,Address,userEmail,Password, "
+            query = "insert into users (userName,Gender,Phone,Address,Email,Password, "
                     + "Role)values (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setString(1, user.getUserName());
@@ -158,7 +158,7 @@ public class UserDAO {
             
 
             int row = stm.executeUpdate();
-            if (row > 1) {
+            if (row > 0) {
                 return true;
             }
         } catch (SQLException e) {
@@ -182,7 +182,7 @@ public class UserDAO {
         con = ConnectDB.getCon();
         try {
             query = "update users set userName = ?, Gender =?,Phone=?,Address=?,"
-                    + "userEmail=?,Password=? where userid=?";
+                    + "Email=?,Password=? where userid=?";
 
             stm = con.prepareStatement(query);
             stm.setString(1, user.getUserName());
@@ -194,7 +194,7 @@ public class UserDAO {
             
             stm.setInt(7, user.getUserID());
             int row = stm.executeUpdate();
-            if (row > 1) {
+            if (row > 0) {
                 return true;
             }
         } catch (SQLException e) {
@@ -222,7 +222,7 @@ public class UserDAO {
             stm = con.prepareStatement(query);
             stm.setInt(1, user.getUserID());
             int row = stm.executeUpdate();
-            if (row > 1) {
+            if (row > 0) {
                 return true;
             }
 
@@ -289,13 +289,13 @@ public class UserDAO {
         if (user == null) {
             return true;
         }
-
+        con = ConnectDB.getCon();
         try {
-            query = "Select * From Users Where Username = '?' AND Email ='?'";
+            query = "Select * From Users Where Email =?";
             stm = con.prepareStatement(query);
-            stm.setString(1, user.getUserName());
-            stm.setString(2, user.getEmail());
-            rs = stm.executeQuery(query);
+            
+            stm.setString(1, user.getEmail());
+            rs = stm.executeQuery();
 
             while (rs.next()) {
                 rs.close();

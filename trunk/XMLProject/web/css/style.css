@@ -24,7 +24,7 @@ body {
 .body5
 {
     width: 100%;
-    background: url(Image/bg_main.jpg) 0 0 repeat;
+    background: url(../Image/bg_main.jpg) 0 0 repeat;
     min-height: 320px;
 }
 .borderMainMenu{
@@ -47,7 +47,9 @@ body {
     display: inline-block;
 }
 
-
+img {
+    cursor: pointer;
+}
 
 .body1 {
     background:url(Image/bg_main.jpg) 0 0  repeat;
@@ -59,7 +61,9 @@ a {
     outline:none
 }
 a:hover {
-    text-decoration:none
+    text-decoration: underline;
+    font-weight: bold;
+    color: #f85959;
 }
 h1 {
     padding:37px 0 0 19px;
@@ -313,4 +317,17 @@ a {
 /*    border-radius: 0px 15px 15px 0px;*/
     border-bottom: 2px solid #565d64;
     padding-left: 30px;
+}
+
+.pure-form {
+    background: url(../Image/bg_form.png) 0 0 repeat;
+    color: white;
+}
+
+#top-ul{
+    font-size: large;
+}
+
+#loginStatus, #regStatus{
+    color: rgb(250, 103, 103);
 }
