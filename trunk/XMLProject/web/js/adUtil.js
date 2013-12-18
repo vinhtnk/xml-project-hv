@@ -20,18 +20,14 @@ function deleteProductXML(){
 }
 
 function deleteProduct(id, callback){
-    xmlHttp = getXmlHttpObject();
-    if(xmlHttp == null){
-        alert("Your browser does not support AJAX");
-        return;
-    }
-    xmlHttp.open("POST", "AdminController");
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var url = "productID=" + id +"&btnAction=delete";
-    //url += createOrderDetailsXML();
-    //url += "&orderXML=" + createOrderXML();
+//    var idbtn = document.getElementById('delP'+id).value;
+    var req = {};
+        req.type = "POST";
+        req.param = "productID=" + id + "&btnAction=delete" ;
+        req.servlet = "AdminController";
+        var deleteProductCallback = function(){
+            callAjax.deleteProductCallBack(callback)
+        };
+        ajaxFunction(req,deleteProductCallback);
 
-    xmlHttp.send(url);
-    //document.getElementById('btnCheckOut').setAttribute('disabled', 'true');
-   // window.location.href="checkOutSuccess.jsp";
 }

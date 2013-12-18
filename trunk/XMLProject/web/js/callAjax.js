@@ -58,7 +58,7 @@ callAjax.loginCallback =  function(LoginCallBack) {
 
            
             }else if(respContent == "Login Admin successful!"){
-                window.location.href = "newhtml.html";
+                window.location.href = "admin_page.jsp";
             }else if(respContent =="logout successful!"){
                 location.reload(false);
             }
@@ -92,6 +92,32 @@ callAjax.regCallback = function(email, password){
             }
         }
         else {
+            console.log("ERROR");
+        }
+    }
+}
+
+callAjax.deleteProductCallBack = function(callback){
+    console.log(xmlhttp.readyState);
+
+    if (xmlhttp.readyState == 4) {
+        console.log(xmlhttp.status);
+        if(xmlhttp.status == 200) {
+            var respContent = xmlhttp.response;
+
+            if(respContent == "delete success"){
+                //
+                window.location.href("admin_page.jsp");
+                location.reload(true);
+                return false;
+            }
+            else{
+                //alert("delete fail");
+                console.log("delete fail");
+            }
+        }
+        else {
+           // alert("delete fail");
             console.log("ERROR");
         }
     }
