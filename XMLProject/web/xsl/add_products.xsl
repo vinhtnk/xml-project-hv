@@ -109,7 +109,8 @@
                     </td>
                     <td>
                         <input type="submit" value="Delete">
-                            <xsl:attribute name="onclick">deleteProduct('<xsl:value-of select="productID"/>')</xsl:attribute>
+                            <xsl:attribute name="id">delP<xsl:value-of select="productID"/></xsl:attribute>
+                            <xsl:attribute name="onclick">deleteProduct('<xsl:value-of select="productID"/>',function(){location.reload(false);});return true;</xsl:attribute>
                         </input>
                     </td>
                 </tr>
