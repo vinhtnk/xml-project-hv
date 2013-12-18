@@ -62,45 +62,49 @@ public class AdminController extends HttpServlet {
             String action = request.getParameter("btnAction");
             //String btndelete = request.getParameter("Delete");
             String productid = request.getParameter("productID");
-            if (action.equalsIgnoreCase("Delete")) {
-                //String orderXML = request.getParameter("orderXML");
-                //String deleteProductXML = request.getParameter("deleteProductXML");
+            if (action != null) {
+                if (action.equalsIgnoreCase("Delete")) {
+                    //String orderXML = request.getParameter("orderXML");
+                    //String deleteProductXML = request.getParameter("deleteProductXML");
 
-                //DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                //DocumentBuilder db = dbf.newDocumentBuilder();
-                //Document doc1 = db.parse(new InputSource(new StringReader(orderXML)));
-                //Document doc2 = db.parse(new InputSource(new StringReader(deleteProductXML)));
+                    //DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    //DocumentBuilder db = dbf.newDocumentBuilder();
+                    //Document doc1 = db.parse(new InputSource(new StringReader(orderXML)));
+                    //Document doc2 = db.parse(new InputSource(new StringReader(deleteProductXML)));
 
-                //TransformerFactory tff = TransformerFactory.newInstance();
-                //Transformer trans = tff.newTransformer();
-                //trans.setOutputProperty(OutputKeys.INDENT, "YES");
+                    //TransformerFactory tff = TransformerFactory.newInstance();
+                    //Transformer trans = tff.newTransformer();
+                    //trans.setOutputProperty(OutputKeys.INDENT, "YES");
 
-                // Source src1 = new DOMSource(doc1);
-                //Source src2 = new DOMSource(doc2);
-                //String path = getServletContext().getRealPath("/");
+                    // Source src1 = new DOMSource(doc1);
+                    //Source src2 = new DOMSource(doc2);
+                    //String path = getServletContext().getRealPath("/");
 
-                //Result result1 = new StreamResult(path + "xml/orders.xml");
-                // Result result2 = new StreamResult(path + "xml/deleteProductXML.xml");
-                //trans.transform(src1, result1);
-                //trans.transform(src2, result2);
+                    //Result result1 = new StreamResult(path + "xml/orders.xml");
+                    // Result result2 = new StreamResult(path + "xml/deleteProductXML.xml");
+                    //trans.transform(src1, result1);
+                    //trans.transform(src2, result2);
 
-                //Products deleteProduct = JAXBUnmarshalling.unmarshallingProducts(path + "xml/deleteProductXML.xml");
-                //List<ProductDTO> listPro = new ArrayList<ProductDTO>();
-                // List<OrderDetailDTO> listOrderdetail = new ArrayList<OrderDetailDTO>();
-                ProductDAO proDao = new ProductDAO();
-                //ProductDTO proDto = new ProductDTO();
-                boolean success = proDao.deleteProduct(productid);
-                if (success) {
-                    out.print("delete success");
-                } else {
-                    out.print("delete fail");
+                    //Products deleteProduct = JAXBUnmarshalling.unmarshallingProducts(path + "xml/deleteProductXML.xml");
+                    //List<ProductDTO> listPro = new ArrayList<ProductDTO>();
+                    // List<OrderDetailDTO> listOrderdetail = new ArrayList<OrderDetailDTO>();
+                    ProductDAO proDao = new ProductDAO();
+                    //ProductDTO proDto = new ProductDTO();
+                    boolean success = proDao.deleteProduct(productid);
+                    if (success) {
+                        out.print("delete success");
+                        //response.sendRedirect("admin_page.jsp");
+                    } else {
+                        out.print("delete fail");
+                    }
                 }
             }
         } //                response.sendRedirect("./checkOutSuccess.jsp");
-         catch (Exception ex) {
+        catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             out.close();
+            //response.sendRedirect("admin_page.jsp");
         }
     }
 
@@ -147,11 +151,6 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
-
-
-
-
 
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
