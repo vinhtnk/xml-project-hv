@@ -3,36 +3,34 @@
  * and open the template in the editor.
  */
 
-function addProduct(productid,productname,category,price,description,imagelink,newproduct){
+function addProduct(productid,productname,category,price,description,imagelink,newproduct,callback){
     if(productid==null){
         alert("productid must be inputed");
     }else
     if(productid!=null && category !=null && productname!=null){
         var req = {};
         req.type = "POST";
-        req.param = "txtProID=" + productid.value+"&txtProName=" +productname.value+
-        "&txtCateID=" +category.value+"&txtPrice=" +price.value+"&txtDes=" +description.value+
-        "&txtImg=" +imagelink.value+"&txtNewPro=" +newproduct.value+"&btnAction=Addproduct&addProductXML"+addProductXML();
+        req.param = "btnAction=Addproduct&addProductXML="+addProductXML(productid,productname,category,price,description,imagelink,newproduct);
         req.servlet = "AdminController";
-        var loginCallback = function(){
-            callAjax.loginCallback(callback)
+        var addProductCallBack = function(){
+            callAjax.addProductCallBack(callback)
         };
-        ajaxFunction(req,loginCallback);
+        ajaxFunction(req,addProductCallBack);
     }
 }
 
 function addProductXML(productid,productname,category,price,description,imagelink,newproduct){
-        var productXMLDOM = "<Products>";
-        productXMLDOM += "<Product>";
-        productXMLDOM += "<ProductI>"+productid.value+"</ProductId>";
-        productXMLDOM += "<ProductName>"+productname.value+"</ProductName>";
+        var productXMLDOM = "<products>";
+        productXMLDOM += "<product>";
+        productXMLDOM += "<productID>"+productid.value+"</productID>";
+        productXMLDOM += "<productName>"+productname.value+"</productName>";
         productXMLDOM += "<CategoryId>"+category.value+"</CategoryId>";
-        productXMLDOM += "<Price>"+price.value+"</Price>";
-        productXMLDOM += "<Description>"+description.value+"</Description>";
-        productXMLDOM += "<Img_Link>"+imagelink.value+"</Img_Link>";
-        productXMLDOM += "<New_Product>"+newproduct.value+"</New_Product>";
-        productXMLDOM += "</Product>";
-        productXMLDOM += "</Products>";
+        productXMLDOM += "<price>"+price.value+"</price>";
+        productXMLDOM += "<categoryID>"+description.value+"</categoryID>";
+        productXMLDOM += "<img_link>"+imagelink.value+"</img_link>";
+        productXMLDOM += "<new_product>"+newproduct.value+"</new_product>";
+        productXMLDOM += "</product>";
+        productXMLDOM += "</products>";
         return productXMLDOM;
 
    

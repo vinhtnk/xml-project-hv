@@ -155,3 +155,33 @@ callAjax.updateProductCallBack = function(callback){
         }
     }
 }
+
+callAjax.addProductCallBack = function(callback){
+    console.log(xmlhttp.readyState);
+
+    if (xmlhttp.readyState == 4) {
+        console.log(xmlhttp.status);
+        if(xmlhttp.status == 200) {
+            var respContent = xmlhttp.response;
+
+            if(respContent == "delete success"){
+                //
+                window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //window.location = "admin_page.jsp";
+                //location.reload();
+               // alert("ok");
+                //return false;
+            }
+            else{
+                //alert("delete fail");
+                console.log("delete fail");
+            }
+        }
+        else {
+           // alert("delete fail");
+            console.log("ERROR");
+        }
+    }
+}
