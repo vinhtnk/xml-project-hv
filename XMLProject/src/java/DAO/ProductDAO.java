@@ -41,7 +41,7 @@ public class ProductDAO {
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
                 product.setPrice(rs.getInt("Price"));
-                product.setDescription(rs.getString("Description"));
+                product.setDescription(rs.getString("Descriptions"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
@@ -81,7 +81,7 @@ public class ProductDAO {
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
                 product.setPrice(rs.getInt("Price"));
-                product.setDescription(rs.getString("Description"));
+                product.setDescription(rs.getString("Descriptions"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
@@ -122,7 +122,7 @@ public class ProductDAO {
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
                 product.setPrice(rs.getInt("Price"));
-                product.setDescription(rs.getString("Description"));
+                product.setDescription(rs.getString("Descriptions"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
@@ -163,7 +163,7 @@ public class ProductDAO {
                 product.setProductName(rs.getString("ProductName"));
                 product.setCategoryID(rs.getInt("CategoryId"));
                 product.setPrice(rs.getInt("Price"));
-                product.setDescription(rs.getString("Description"));
+                product.setDescription(rs.getString("Descriptions"));
                 product.setImg_link(rs.getString("Image_Link"));
                 product.setNew_product(rs.getBoolean("New_Product"));
                 listProduct.add(product);
@@ -192,7 +192,7 @@ public class ProductDAO {
     public boolean addNewProduct(ProductDTO product) {
         con = ConnectDB.getCon();
         try {
-            query = "insert into product (productID, productName, categoryid, price, description, image_link, new_product"
+            query = "insert into product (productID, productName, categoryid, price, descriptions, image_link, new_product)"
                     + "values (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setString(1, product.getProductID());
@@ -227,7 +227,7 @@ public class ProductDAO {
     public boolean updateProduct1(String id, String des,String img,String name, int cate,int price, String isnew){
         con = ConnectDB.getCon();
         try {
-            query = "update product set productName = ?, categoryid =?, price=?, description=?, "
+            query = "update product set productName = ?, categoryid =?, price=?, descriptions=?, "
                     + "image_link=?, new_product=? where productid=?" ;
 
             stm = con.prepareStatement(query);
@@ -262,7 +262,7 @@ public class ProductDAO {
     public boolean updateProduct(ProductDTO product){
         con = ConnectDB.getCon();
         try {
-            query = "update product set productName = ?, categoryid =?, price=?, description=?, "
+            query = "update product set productName = ?, categoryid =?, price=?, descriptions=?, "
                     + "image_link=?, new_product=? where productid=?" ;
 
             stm = con.prepareStatement(query);
