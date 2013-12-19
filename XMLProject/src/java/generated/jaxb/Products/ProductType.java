@@ -136,7 +136,7 @@ public class ProductType {
      * Gets the value of the price property.
      * 
      */
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
