@@ -15,7 +15,6 @@
 
 <%
             String webpath = application.getRealPath("/");
-            marshallerUtils.marshallingCategories(webpath + "xml/categories.xml");
             marshallerUtils.marshallingProduct(webpath + "xml/products.xml");
 %>
 
@@ -41,7 +40,9 @@
     </head>
     <body>
         <div id="header">
-            <jsp:include page="jsp/header.jsp"/>
+            <form action="ProductPDF" method="post">
+            <jsp:include page="jsp/headerAd.jsp"/>
+            </form>
         </div>
         <div>
             <form action="AdminController" method="Post">
