@@ -11,6 +11,7 @@ import DTO.OrderDTO;
 import DTO.OrderDetailDTO;
 import DTO.ProductDTO;
 import Utils.JAXBUnmarshalling;
+import generated.jaxb.OrderDetail.OrderDetails;
 import generated.jaxb.Products.Products;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,32 +65,7 @@ public class AdminController extends HttpServlet {
             String productid = request.getParameter("productID");
             if (action != null) {
                 if (action.equalsIgnoreCase("Delete")) {
-                    //String orderXML = request.getParameter("orderXML");
-                    //String deleteProductXML = request.getParameter("deleteProductXML");
-
-                    //DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                    //DocumentBuilder db = dbf.newDocumentBuilder();
-                    //Document doc1 = db.parse(new InputSource(new StringReader(orderXML)));
-                    //Document doc2 = db.parse(new InputSource(new StringReader(deleteProductXML)));
-
-                    //TransformerFactory tff = TransformerFactory.newInstance();
-                    //Transformer trans = tff.newTransformer();
-                    //trans.setOutputProperty(OutputKeys.INDENT, "YES");
-
-                    // Source src1 = new DOMSource(doc1);
-                    //Source src2 = new DOMSource(doc2);
-                    //String path = getServletContext().getRealPath("/");
-
-                    //Result result1 = new StreamResult(path + "xml/orders.xml");
-                    // Result result2 = new StreamResult(path + "xml/deleteProductXML.xml");
-                    //trans.transform(src1, result1);
-                    //trans.transform(src2, result2);
-
-                    //Products deleteProduct = JAXBUnmarshalling.unmarshallingProducts(path + "xml/deleteProductXML.xml");
-                    //List<ProductDTO> listPro = new ArrayList<ProductDTO>();
-                    // List<OrderDetailDTO> listOrderdetail = new ArrayList<OrderDetailDTO>();
                     ProductDAO proDao = new ProductDAO();
-                    //ProductDTO proDto = new ProductDTO();
                     boolean success = proDao.deleteProduct(productid);
                     if (success) {
                         out.print("delete success");
@@ -99,8 +75,38 @@ public class AdminController extends HttpServlet {
                     }
                 }
             }
-        } //                response.sendRedirect("./checkOutSuccess.jsp");
-        catch (Exception ex) {
+            if (action.equalsIgnoreCase("addproduct")) {
+                String addProductXML = request.getParameter("addProductXML");
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                Document doc = db.parse(new InputSource(new StringReader(addProductXML)));
+
+                TransformerFactory tff = TransformerFactory.newInstance();
+                Transformer trans = tff.newTransformer();
+                trans.setOutputProperty(OutputKeys.INDENT, "YES");
+                trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                Source src = new DOMSource(doc);
+                String path = getServletContext().getRealPath("/");
+                Result result = new StreamResult(path + "xml/addProduct.xml");
+                trans.transform(src, result);
+
+                Products product = JAXBUnmarshalling.unmarshallingProduct(path + "xml/addProduct.xml");
+                List<ProductDTO> newpro = new ArrayList<ProductDTO>();
+                ProductDTO proDto = new ProductDTO();
+                proDto.setProductID( product.getProduct().get(1).getProductID());
+                proDto.setProductName(product.getProduct().get(1).getProductName());
+                //proDto.setCategoryID(product.getProduct().get(1).getCategoryID());
+                //proDto.setPrice(product.getProduct().get(1).getPrice());
+                proDto.setDescription(product.getProduct().get(1).getDescription());
+                proDto.setImg_link(product.getProduct().get(1).getImgLink());
+                //proDto.isNew_product(product.getProduct().get(1).isNewProduct());
+                ProductDAO proDao = new ProductDAO();
+                proDao.addNewProduct(proDto);
+                //OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+                //orderDetailDAO.addProducttoOrder(listOrderdetail, orderId);
+
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             out.close();
@@ -122,6 +128,9 @@ public class AdminController extends HttpServlet {
         try {
             processRequest(request, response);
 
+
+
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -131,6 +140,8 @@ public class AdminController extends HttpServlet {
         } catch (TransformerException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
 
 
 
@@ -152,6 +163,9 @@ public class AdminController extends HttpServlet {
         try {
             processRequest(request, response);
 
+
+
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -161,6 +175,8 @@ public class AdminController extends HttpServlet {
         } catch (TransformerException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }
 
     /** 
@@ -170,6 +186,7 @@ public class AdminController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+
 
 
 
