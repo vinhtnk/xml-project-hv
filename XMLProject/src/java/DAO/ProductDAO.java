@@ -224,6 +224,41 @@ public class ProductDAO {
         return false;
     }
 
+    public boolean updateProduct1(String id, String des,String img,String name, int cate,int price, String isnew){
+        con = ConnectDB.getCon();
+        try {
+            query = "update product set productName = ?, categoryid =?, price=?, description=?, "
+                    + "image_link=?, new_product=? where productid=?" ;
+
+            stm = con.prepareStatement(query);
+            stm.setString(1, id);
+            stm.setString(2, name );
+            stm.setInt(3, cate);
+            stm.setInt(4, price);
+            stm.setString(5, des);
+            stm.setString(6, img);
+            stm.setString(7, isnew);
+            int row = stm.executeUpdate();
+            if(row>1){
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+
     public boolean updateProduct(ProductDTO product){
         con = ConnectDB.getCon();
         try {
@@ -259,15 +294,15 @@ public class ProductDAO {
         return false;
     }
 
-    public boolean deleteProduct(ProductDTO product){
+    public boolean deleteProduct(String id){
         con = ConnectDB.getCon();
         try {
             query = "delete from product where productid=?" ;
 
             stm = con.prepareStatement(query);            
-            stm.setString(1, product.getProductID());
+            stm.setString(1, id);
             int row = stm.executeUpdate();
-            if(row>1){
+            if(row>0){
                 return true;
             }
             
