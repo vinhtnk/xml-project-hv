@@ -29,7 +29,14 @@
         sessionStorage.removeItem("EMAIL");
         sessionStorage.removeItem("USERNAME");
     };
+var info = {};
+        info.ssEmail = "${EMAIL}";
+        info.ssUsername = "${USER}";
 
+        sessionUser(info);
+        if(info.ssEmail!="" || info.ssEmail!=null){
+            checkType(info.ssEmail);
+        }
 </script>
 
 <html>
