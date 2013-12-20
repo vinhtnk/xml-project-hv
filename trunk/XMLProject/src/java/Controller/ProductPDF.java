@@ -55,8 +55,8 @@ public class ProductPDF extends HttpServlet {
             String path = getServletContext().getRealPath("/");
             String xslPath = path + "xsl/productPDF.xsl";
             String xmlPath = path + "xml/products.xml";
-            String foPath = path + "xsl/abc.fo";
-            String output = path + "xsl/";
+            String foPath = path + "fo/abc.fo";
+            //String output = path + "xsl/";
             methodTrAX(xslPath, xmlPath, foPath);
             File file = new File(foPath);
             FileInputStream input = new FileInputStream(file);
@@ -137,8 +137,7 @@ public class ProductPDF extends HttpServlet {
             StreamSource xmlFile = new StreamSource(xmlPath);
             StreamResult htmlFile = new StreamResult(new FileOutputStream(foPath));
             trans.transform(xmlFile, htmlFile);
-        } catch (TransformerConfigurationException ex) {
-            ex.printStackTrace();
+        
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (TransformerException ex) {
