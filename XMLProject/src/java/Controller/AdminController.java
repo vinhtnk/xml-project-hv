@@ -75,6 +75,20 @@ public class AdminController extends HttpServlet {
                     }
                 }
             }
+            if (action.equalsIgnoreCase("update")) {
+                String id = request.getParameter("productID");
+                String name = request.getParameter("productName");
+                int cate = Integer.valueOf(request.getParameter("category"));
+                int price = Integer.valueOf(request.getParameter("price"));
+                String des = request.getParameter("description");
+                String img = request.getParameter("imagelink");
+                String newpro = request.getParameter("newpro");
+                ProductDAO proDao= new ProductDAO();
+                proDao.updateProduct1(id, des, img, name, cate, price);
+                response.sendRedirect("admin_page.jsp");
+
+            }
+
             if (action.equalsIgnoreCase("addproduct")) {
                 String addProductXML = request.getParameter("addProductXML");
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -93,7 +107,7 @@ public class AdminController extends HttpServlet {
                 Products product = JAXBUnmarshalling.unmarshallingProduct(path + "xml/addProduct.xml");
                 List<ProductDTO> newpro = new ArrayList<ProductDTO>();
                 ProductDTO proDto = new ProductDTO();
-                proDto.setProductID( product.getProduct().get(0).getProductID());
+                proDto.setProductID(product.getProduct().get(0).getProductID());
                 proDto.setProductName(product.getProduct().get(0).getProductName());
                 proDto.setCategoryID(product.getProduct().get(0).getCategoryID().intValue());
                 proDto.setPrice(product.getProduct().get(0).getPrice());
@@ -101,10 +115,11 @@ public class AdminController extends HttpServlet {
                 proDto.setImg_link(product.getProduct().get(0).getImgLink());
                 proDto.setNew_product(product.getProduct().get(0).isNewProduct());
                 ProductDAO proDao = new ProductDAO();
-                proDao.addNewProduct(proDto);
-                //OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-                //orderDetailDAO.addProducttoOrder(listOrderdetail, orderId);
-
+                if (proDao.addNewProduct(proDto)) {
+                    out.print("Added");
+                } else {
+                    out.print("Failed");
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

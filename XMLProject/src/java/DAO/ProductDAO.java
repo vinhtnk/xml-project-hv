@@ -196,15 +196,15 @@ public class ProductDAO {
                     + "values (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(query);
             stm.setString(1, product.getProductID());
-            stm.setString(2, product.getProductID());
+            stm.setString(2, product.getProductName());
             stm.setInt(3, product.getCategoryID());
             stm.setDouble(4, product.getPrice());
             stm.setString(5, product.getDescription());
             stm.setString(6, product.getImg_link());
             stm.setBoolean(7, product.isNew_product());
-            stm.execute();
+            //stm.execute();
             int row = stm.executeUpdate();
-            if(row>1){
+            if(row>0){
                 return true;
             }
         } catch (SQLException e) {
@@ -224,22 +224,22 @@ public class ProductDAO {
         return false;
     }
 
-    public boolean updateProduct1(String id, String des,String img,String name, int cate,int price, String isnew){
+    public boolean updateProduct1(String id, String des,String img,String name, int cate,int price){
         con = ConnectDB.getCon();
         try {
-            query = "update product set productName = ?, categoryid =?, price=?, descriptions=?, "
-                    + "image_link=?, new_product=? where productid=?" ;
+            query = "update product set productName = '?', categoryid =?, price=?, descriptions='?', "
+                    + "image_link='?',New_Product='?'  where productid='?'" ;
 
             stm = con.prepareStatement(query);
-            stm.setString(1, id);
-            stm.setString(2, name );
-            stm.setInt(3, cate);
-            stm.setInt(4, price);
-            stm.setString(5, des);
-            stm.setString(6, img);
-            stm.setString(7, isnew);
+            stm.setString(1, name);
+            stm.setInt(2, cate );
+            stm.setInt(3, price);
+            stm.setString(4, des);
+            stm.setString(5, img);
+            stm.setBoolean(6, false);
+            stm.setString(7, id);
             int row = stm.executeUpdate();
-            if(row>1){
+            if(row>0){
                 return true;
             }
         } catch (SQLException e) {

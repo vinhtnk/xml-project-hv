@@ -77,7 +77,7 @@ public class JAXBUnmarshalling {
     }
     public static Products unmarshallingProduct(String sourceXML){
         try {
-            JAXBContext ctx = JAXBContext.newInstance(OrderDetails.class);
+            JAXBContext ctx = JAXBContext.newInstance(Products.class);
             Unmarshaller unmarshaller = ctx.createUnmarshaller();
             File file = new File(sourceXML);
             Products product  = (Products) unmarshaller.unmarshal(file);
