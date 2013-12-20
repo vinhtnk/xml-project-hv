@@ -30,7 +30,9 @@
         sessionStorage.removeItem("EMAIL");
         sessionStorage.removeItem("USERNAME");
     };
-    var info = {};
+
+    function start(){
+        var info = {};
         info.ssEmail = "${EMAIL}";
         info.ssUsername = "${USER}";
 
@@ -38,7 +40,7 @@
         if(info.ssEmail!="" || info.ssEmail!=null){
             checkType(info.ssEmail);
         }
-
+    }
 </script>
 
 <html>
@@ -46,17 +48,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>H2 Store</title>
     </head>
-    <body>
+    <body onload="start()">
         <div id="header">
             <form action="ProductPDF" method="post">
-            <jsp:include page="jsp/headerAd.jsp"/>
+                <jsp:include page="jsp/headerAd.jsp"/>
             </form>
         </div>
         <div>
             <form action="AdminController" method="Post">
                 <table class="body5" >
                     <tr>
-                      
+
                         <td valign="top" class="borderMainMenu" width="600px">
                             <jsp:include page="jsp/admin.jsp" flush="true"/>
                             <br/>
