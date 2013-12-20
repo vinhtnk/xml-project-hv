@@ -32,43 +32,12 @@ public class XJCUtils {
      */
     public static void main(String[] args) {
         try {
-//            XJCUtils.generateCategoriesObject();
-//            XJCUtils.generateProductsObject();
-//            XJCUtils.generateUsersObject();
-//            XJCUtils.generateOrdersObject();
-//            XJCUtils.generateOrderDetailsObject();
-//            JAXBMarshalling.marshallingOrder("src/java/Utils/demo3.xml");
-//            JAXBMarshalling.marshallingOrderDetails("src/java/Utils/demo4.xml");
-//            String orderDetailsXMLDOM = "<orderDetails>";
-//
-//            orderDetailsXMLDOM += "<orderDetail>";
-//            orderDetailsXMLDOM += "<orderID></orderID>";
-//            orderDetailsXMLDOM += "<productID>" + "123" + "</productID>";
-//            orderDetailsXMLDOM += "<productName>" + "abc" + "</productName>";
-//            orderDetailsXMLDOM += "<quantity>" + "1" + "</quantity>";
-//            orderDetailsXMLDOM += "<price>" + "145" + "</price>";
-//            orderDetailsXMLDOM += "</orderDetail>";
-//            orderDetailsXMLDOM += "</orderDetails>";
-//                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder db = dbf.newDocumentBuilder();
-//            //Document doc1 = db.parse(new InputSource(new StringReader(orderXML)));
-//            Document doc2 = db.parse(new InputSource(new StringReader(orderDetailsXMLDOM)));
-//
-//            TransformerFactory tff = TransformerFactory.newInstance();
-//            Transformer trans = tff.newTransformer();
-//            trans.setOutputProperty(OutputKeys.INDENT, "YES");
-//
-//            //Source src1 = new DOMSource(doc1);
-//            Source src2 = new DOMSource(doc2);
-//            //String path = getServletContext().getRealPath("/");
-//
-//            //Result result1 = new StreamResult(path + "xml/orders.xml");
-//            Result result2 = new StreamResult("src/java/Utils/orderDetails.xml");
-//            //trans.transform(src1, result1);
-//            trans.transform(src2, result2);
-            OrderDetails orderDetails = JAXBUnmarshalling.unmarshallingOrderDetails("src/java/Utils/orderDetails.xml");
-            System.out.println("name:" + orderDetails.getOrderDetail().get(0).getProductID());
-            System.out.println("ok");
+            XJCUtils.generateCategoriesObject();
+            XJCUtils.generateProductsObject();
+            XJCUtils.generateUsersObject();
+            XJCUtils.generateOrdersObject();
+            XJCUtils.generateOrderDetailsObject();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
