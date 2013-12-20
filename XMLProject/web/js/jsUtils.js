@@ -380,9 +380,7 @@ function ajaxFunction(req,callback) {
     {// code for IE6, IE5
         xmlhttp=new ActiveXObject("Msxm12.XMLHTTP");
     }
-    if(xmlhttp) {
-        //  var txtname = username.value;
-        // var txtpwd = document.getElementById(password);
+    if(xmlhttp) {        
         if(req.type =="GET"){
             var reqURL = req.servlet;
             if(req.param!=undefined){
