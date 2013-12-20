@@ -16,22 +16,29 @@ function addProduct(productid,productname,category,price,description,imagelink,n
             callAjax.addProductCallBack(callback)
         };
         ajaxFunction(req,addProductCallBack);
+    // window.location = "admin_page.jsp";
     }
 }
 
 function addProductXML(productid,productname,category,price,description,imagelink,newproduct){
-        var productXMLDOM = "<products>";
-        productXMLDOM += "<product>";
-        productXMLDOM += "<productID>"+productid.value+"</productID>";
-        productXMLDOM += "<productName>"+productname.value+"</productName>";
-        productXMLDOM += "<CategoryId>"+category.value+"</CategoryId>";
-        productXMLDOM += "<price>"+price.value+"</price>";
-        productXMLDOM += "<categoryID>"+description.value+"</categoryID>";
-        productXMLDOM += "<img_link>"+imagelink.value+"</img_link>";
-        productXMLDOM += "<new_product>"+newproduct.value+"</new_product>";
-        productXMLDOM += "</product>";
-        productXMLDOM += "</products>";
-        return productXMLDOM;
+    var np = newproduct.value;
+    if(np == 'True'){
+        np = 1;
+    } else {
+        np=0;
+    }
+    var productXMLDOM = "<products>";
+    productXMLDOM += "<product>";
+    productXMLDOM += "<productID>"+productid.value+"</productID>";
+    productXMLDOM += "<productName>"+productname.value+"</productName>";
+    productXMLDOM += "<categoryID>"+category.value+"</categoryID>";
+    productXMLDOM += "<price>"+price.value+"</price>";
+    productXMLDOM += "<description>"+description.value+"</description>";
+    productXMLDOM += "<img_link>"+imagelink.value+"</img_link>";
+    productXMLDOM += "<new_product>"+np+"</new_product>";
+    productXMLDOM += "</product>";
+    productXMLDOM += "</products>";
+    return productXMLDOM;
 
    
 }
@@ -41,11 +48,13 @@ function update(){
     return indent;
 }
 
-function updateProduct(id, callback){
+function updateProduct(productid,productname,category,price,description,imagelink,newproduct, callback){
     //    var idbtn = document.getElementById('delP'+id).value;
     var req = {};
     req.type = "POST";
-    req.param = "productID=" + id + "&btnAction=update" ;
+    req.param = "productID=" + productid.value +"&productName=" + productname.value+
+        "&category=" + category.value+"&price=" + price.value+"&description=" + description.value+
+        "&imagelink=" + imagelink.value+ "&newpro=" + newproduct.value +"&btnAction=update" ;
     req.servlet = "AdminController";
     var updateProductCallback = function(){
         callAjax.updateProductCallBack(callback)
@@ -55,13 +64,16 @@ function updateProduct(id, callback){
 }
 function deleteProduct(id, callback){
     //    var idbtn = document.getElementById('delP'+id).value;
-    var req = {};
-    req.type = "POST";
-    req.param = "productID=" + id + "&btnAction=delete" ;
-    req.servlet = "AdminController";
-    var deleteProductCallback = function(){
-        callAjax.deleteProductCallBack(callback)
-    };
-    ajaxFunction(req,deleteProductCallback);
-
+    var r = confirm("Bạn muốn xóa sản phẩm này?");
+    if(r==true){
+        var req = {};
+        req.type = "POST";
+        req.param = "productID=" + id + "&btnAction=delete" ;
+        req.servlet = "AdminController";
+        //    var deleteProductCallback = function(){
+        //        callAjax.deleteProductCallBack(callback)
+        //    };
+        ajaxFunction(req);
+        window.location = "admin_page.jsp";
+    }
 }

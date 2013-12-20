@@ -31,23 +31,21 @@
 				Report detail
                     </fo:block>
                 </fo:static-content>
-
-                <fo:static-content flow-name="xsl-region-after">
-                    <fo:block font-size="13pt" font-family="Arial" line-height="24pt"
-                    background-color="black" space-after.optimum="15pt"
-					color="white" text-align="center" padding-top="3pt">
-                                                    SuperMarket Online Cooperation
-                    </fo:block>
-                </fo:static-content>
                 <fo:flow flow-name="xsl-region-body">
                     <fo:block>
                         <fo:block padding="0.3in" margin-left="0.5in">
                             <fo:block font-size="13pt" >
-                              Overall invoice detail:
+                              List Products
                             </fo:block>
                             <fo:table border-collapse="separate" table-layout="fixed">
-                                <fo:table-column column-width="6cm"/>
-                                <fo:table-column column-width="12cm"/>
+                                <fo:table-column column-width="3cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="5cm"/>
+                                <fo:table-column column-width="3cm"/>
                                 <fo:table-body>
                                     <fo:table-row>
                                         <fo:table-cell>

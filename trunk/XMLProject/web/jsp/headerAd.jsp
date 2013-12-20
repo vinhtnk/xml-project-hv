@@ -121,13 +121,7 @@
         </table>
     </form>
     <div id="menu" class="style1">
-        <ul id="menu-content" class="menu-content">
-            <li><a href="index.jsp">Trang chủ</a></li>
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Liên hệ</a></li>
-
-
-        </ul>
+      
     </div>
     <div class="style1">
         <br/>
@@ -137,15 +131,9 @@
             <tr>
                 <td width="45%" />
                 <td width="55%">
-                    <form id="formSearch">
-                        <span class="styleTextSearch">Tìm kiếm tên sản phẩm</span>
-                        <input name="txtSearchBox" class="textboxSearch" type ="text" id="txtSearch"/>
-
-                        <img ID="btnSearch" src="./Image/search.png" OnClick="btnSearch_Click();"
-                             Style="vertical-align: inherit; cursor: pointer"/>
-
-                    </form>
-
+                    <a href="admin_page.jsp" style="font-weight: bold; text-decoration: none; color: #CCCCCC;
+                                   font-size: small">Admin home page
+                                </a>
                 </td>
                 <td>
                     <table height="20" cellpadding="0" cellspacing="0" border="0" width="300px">

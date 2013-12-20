@@ -164,7 +164,7 @@ callAjax.addProductCallBack = function(callback){
         if(xmlhttp.status == 200) {
             var respContent = xmlhttp.response;
 
-            if(respContent == "delete success"){
+            if(respContent == "Added"){
                 //
                 window.location = "admin_page.jsp";
                 //window.location = "admin_page.jsp";
@@ -176,7 +176,7 @@ callAjax.addProductCallBack = function(callback){
             }
             else{
                 //alert("delete fail");
-                console.log("delete fail");
+                console.log("add fail");
             }
         }
         else {

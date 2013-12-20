@@ -73,15 +73,19 @@ var info = {};
                     </tr>
                     <tr>
                         <td>Image_Link</td>
-                        <td><input id="imagelink" type="text" name="txtImg" /></td>
+                        <td><input id="imagelink" type="file" name="txtImg" /></td>
                     </tr>
                     <tr>
                         <td>New_Product</td>
-                        <td><input id="newproduct" type="text" name="txtNewPro" /></td>
+                        <td><select id="newproduct" name="txtNewPro">
+                                <option>True</option>
+                                <option>False</option>
+                            </select> </td>
                     </tr>
+                    <br/>
                     <tr>
                         <td></td>
-                        <td><input type="submit" onclick="addProduct(productid,productname,category,price,description,imagelink,newproduct)"/></td>
+                        <td><input type="submit" value="Add" onclick="addProduct(productid,productname,category,price,description,imagelink,newproduct)"/></td>
                     </tr>
                 </table>
                 
