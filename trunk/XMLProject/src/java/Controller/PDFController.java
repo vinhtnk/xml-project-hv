@@ -75,7 +75,39 @@ public class PDFController extends HttpServlet {
                 File fo = new File(foPath);
                 Source src = new StreamSource(fo);
                 Result result = new SAXResult(fop.getDefaultHandler());
-                
+
+                trans.transform(src, result);
+                byte[] content = output.toByteArray();
+                response.setContentLength(content.length);
+                response.getOutputStream().write(content);
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+            } else if (btnAction.equalsIgnoreCase("printPDF")) {
+                String path = getServletContext().getRealPath("/");
+                String xslPath = path + "xsl/productPDF.xsl";
+                String xmlPath = path + "xml/products.xml";
+                String foPath = path + "fo/abc.fo";
+                //String output = path + "xsl/";
+                methodTrAX(xslPath, xmlPath, foPath, path);
+                File file = new File(foPath);
+                FileInputStream input = new FileInputStream(file);
+
+
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                response.setContentType("application/pdf");
+
+                FopFactory ff = FopFactory.newInstance();
+                FOUserAgent fua = ff.newFOUserAgent();
+
+                Fop fop = ff.newFop(MimeConstants.MIME_PDF, fua, output);
+
+                TransformerFactory tff = TransformerFactory.newInstance();
+                Transformer trans = tff.newTransformer();
+                trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                File fo = new File(foPath);
+                Source src = new StreamSource(fo);
+                Result result = new SAXResult(fop.getDefaultHandler());
+
                 trans.transform(src, result);
                 byte[] content = output.toByteArray();
                 response.setContentLength(content.length);
